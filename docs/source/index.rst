@@ -10,8 +10,11 @@ Welcome to PyCartool's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-.. automodule:: pycartool
+.. automodule::
     :members:
+
+.. autosummary::
+   :toctree: generated
 
 
 Indices and tables
