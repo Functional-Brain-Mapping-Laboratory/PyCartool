@@ -7,6 +7,7 @@
 from mne.channels import Montage
 import numpy as np
 
+
 def xyz_to_montage(path, kind=''):
     """Reads and convert xyz positions to a mne montage type
 
@@ -27,5 +28,5 @@ def xyz_to_montage(path, kind=''):
                        dtype=np.dtype(str))
     names = names.tolist()
     montage = Montage(coord, names, kind,
-                   selection=[i for i in range(n)])
+                      selection=[i for i in range(n)])
     return(montage)
