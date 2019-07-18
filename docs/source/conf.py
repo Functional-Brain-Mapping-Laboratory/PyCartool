@@ -13,8 +13,10 @@
 import os
 import sys
 curdir = os.path.dirname(__file__)
-sys.path.append(os.path.abspath(os.path.join(curdir, '..', 'pycartool')))
 
+sys.path.append(os.path.abspath(os.path.join(curdir, '..', 'pycartool')))
+sys.path.insert(0, os.path.abspath('../'))
+sys.path.insert(0, os.path.abspath('/home/ferat/Desktop/PyCartool'))
 # -- Project information -----------------------------------------------------
 
 project = 'PyCartool'
@@ -27,7 +29,7 @@ author = 'Victor Férat / Tanguy Vivier'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.napoleon']
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.coverage', 'sphinx.ext.napoleon']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
