@@ -6,15 +6,14 @@
 Welcome to PyCartool's documentation!
 =====================================
 
+This is a test
+
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :numbered:
 
-.. automodule::
-    :members:
 
-.. autosummary::
-   :toctree: generated
+   pycartool.io
 
 
 Indices and tables
