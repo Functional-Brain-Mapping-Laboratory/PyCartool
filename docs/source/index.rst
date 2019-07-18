@@ -10,6 +10,8 @@ Welcome to PyCartool's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+.. automodule:: pycartool
+    :members:
 
 
 Indices and tables
