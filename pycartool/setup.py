@@ -25,8 +25,6 @@ setuptools.setup(
 
      url="https://github.com/vferat/PyCartool",
 
-     packages=setuptools.find_packages(),
-
      license="BSD-3-Clause",
 
      python_requires='>=3.6',
