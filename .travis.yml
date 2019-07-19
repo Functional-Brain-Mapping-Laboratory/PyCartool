@@ -7,7 +7,7 @@ install:
   - pip install -r requirements.txt
 # command to run tests
 script:
-  - py.test  --cov-report term --cov=app/test/
+  - py.test  --cov-report term --cov=pycartool/test/
 
 env:
   - CODECOV_TOKEN=2edb5931-be93-4532-ba09-2beacb3d7817 #IF ONLY YOU HAVE A PRIVATE REPOSITORY
