@@ -10,8 +10,6 @@ setuptools.setup(
 
      version='0.1',
 
-     scripts=['dokr'] ,
-
      author="Victor Férat",
 
      author_email="victor.ferat@live.fr",
