@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/vferat/PyCartool.svg?branch=master)](https://travis-ci.com/vferat/PyCartool)
+[![codecov](https://codecov.io/gh/vferat/PyCartool/branch/master/graph/badge.svg)](https://codecov.io/gh/vferat/PyCartool)
 [![Documentation Status](https://readthedocs.org/projects/pycartool/badge/?version=latest)](https://pycartool.readthedocs.io/en/latest/?badge=latest)
 ![License](https://img.shields.io/badge/license-BSD-green.svg)
 
