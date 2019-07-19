@@ -1,14 +1,18 @@
 import setuptools
+from os import path
 
-with open("../README.md", "r") as fh:
 
-    long_description = fh.read()
+here = path.abspath(path.dirname(__file__))
+
+with open(path.join(here, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
+
 
 setuptools.setup(
 
      name='pycartool',
 
-     version='0.0.1',
+     version='0.0.5',
 
      author="Victor Férat",
 
