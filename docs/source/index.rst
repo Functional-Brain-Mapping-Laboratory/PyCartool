@@ -12,8 +12,7 @@ This is a test
    :maxdepth: 2
    :numbered:
 
-
-   pycartool.io
+   pycartool
 
 
 Indices and tables
