@@ -5,6 +5,7 @@
 # License: BSD (3-clause)
 import struct
 import re
+import time
 
 import numpy as np
 import mne
@@ -48,18 +49,21 @@ def read_sef(path):
         name = [char for char in f.read(8).split(b'\x00')
                 if char != b''][0]
         ch_names.append(name.decode('utf-8'))
-
     # Read data
     buffer = np.frombuffer(
         f.read(n_channels * num_time_frames * 8),
         dtype=np.float32,
         count=n_channels * num_time_frames)
     data = np.reshape(buffer, (num_time_frames, n_channels))
-
+    # Create infos
+    description = "Imported from Pycartool"
+    record_time = time.struct_time(tm_year=year, tm_mon=month, tm_mday=day,
+                                   tm_hour=hour, tm_min=minute, tm_sec=second,
+                                   tm_isdst=-1)
+    meas_date = (time.mktime(record_time), millisecond)
     ch_types = ['eeg' for i in range(n_channels)]
-    infos = create_info(
-        ch_names=ch_names, sfreq=sfreq,
-        ch_types=ch_types)
+    infos = create_info(ch_names=ch_names, sfreq=sfreq, description=description,
+                        ch_types=ch_types, meas_date=meas_date)
     raw = RawArray(np.transpose(data), infos)
     return (raw)
 
