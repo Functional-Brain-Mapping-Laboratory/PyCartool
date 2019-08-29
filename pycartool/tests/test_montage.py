@@ -4,7 +4,6 @@
 # License: BSD (3-clause)
 
 import os
-import pytest
 
 from mne.channels.montage import Montage
 from ..io.montage import read_xyz

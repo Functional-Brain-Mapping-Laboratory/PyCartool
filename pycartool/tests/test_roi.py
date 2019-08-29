@@ -4,9 +4,6 @@
 # License: BSD (3-clause)
 
 import os
-import pytest
-
-import mne
 from ..io.roi import read_roi
 
 dir_path = os.path.dirname(os.path.realpath(__file__))

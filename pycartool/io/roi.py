@@ -23,6 +23,7 @@ def read_roi(filename):
     """
     with open(filename) as f:
         RO = f.readline().strip()
+        print(RO)
         if RO != "RO01":
             print(f"{RO} format not supported")
             raise ValueError

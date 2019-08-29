@@ -4,9 +4,6 @@
 # License: BSD (3-clause)
 
 import os
-import pytest
-
-import mne
 from ..io.sef import read_sef, write_sef
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
