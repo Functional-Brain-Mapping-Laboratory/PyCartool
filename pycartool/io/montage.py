@@ -8,13 +8,13 @@ from mne.channels import Montage
 import numpy as np
 
 
-def read_xyz(path, kind=''):
+def read_xyz(filename, kind=''):
     """Reads and convert xyz positions to a mne montage type
 
     Parameters
     ----------
-    path : str
-        The filepath of the xyz file.
+    filename : str
+        The filename of the xyz file.
 
     Returns
     -------
@@ -22,9 +22,9 @@ def read_xyz(path, kind=''):
         Montage for EEG electrode locations.
     """
 
-    n = int(open(path).readline().lstrip().split(' ')[0])
-    coord = np.loadtxt(path, skiprows=1, usecols=(0, 1, 2), max_rows=n)
-    names = np.loadtxt(path, skiprows=1, usecols=3, max_rows=n,
+    n = int(open(filename).readline().lstrip().split(' ')[0])
+    coord = np.loadtxt(filename, skiprows=1, usecols=(0, 1, 2), max_rows=n)
+    names = np.loadtxt(filename, skiprows=1, usecols=3, max_rows=n,
                        dtype=np.dtype(str))
     names = names.tolist()
     montage = Montage(coord, names, kind,
