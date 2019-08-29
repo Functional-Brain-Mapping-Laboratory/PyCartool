@@ -8,7 +8,7 @@ from mne.channels import Montage
 import numpy as np
 
 
-def read_xyz_montage(path, kind=''):
+def read_xyz(path, kind=''):
     """Reads and convert xyz positions to a mne montage type
 
     Parameters

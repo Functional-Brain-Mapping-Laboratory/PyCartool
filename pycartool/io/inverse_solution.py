@@ -6,11 +6,27 @@ import struct
 import numpy as np
 
 
-def read_is(fname):
-    with open(fname,"rb") as f:
-        print(f"Reading {fname}")
+def read_is(filename):
+    """Read Cartool inverse solution (.is) file.
+
+    Parameters
+    ----------
+    filename : str
+        the is file to read.
+
+    Returns
+    -------
+    ndarray, shape (n_regularizations, n_dim, n_solutionpoints, n_channels)
+        the inverse solution matrices. n_dim=1 if solutions are scalar or
+        n_dim=3 for vectorial solutions.
+
+    """
+    with open(filename, "rb") as f:
+        print(f"Reading {filename}")
         print(f"Reading Header...")
-        iso = ''.join([struct.unpack('c', f.read(1))[0].decode("utf-8") for i in range(4)])
+        iso = [struct.unpack('c', f.read(1))[0].decode("utf-8")
+               for i in range(4)]
+        iso = ''.join(iso)
         if iso not in ["IS01", "IS02", "IS03"]:
             print(f"{iso} : Invalid ISO type, please check that input file is "
                   "a Inverse Solution matrix")
@@ -73,6 +89,3 @@ def read_is(fname):
                 regularisation_solutions.append(data)
 
     return(np.array(regularisation_solutions))
-
-a = read_is(r"C:\Users\Victor Ferat\Desktop\MNI_LA_204.Laura.is")
-print(a.shape)

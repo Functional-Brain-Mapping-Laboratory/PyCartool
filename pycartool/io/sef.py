@@ -20,15 +20,15 @@ def read_sef(path):
 
     Parameters
     ----------
-    path : str
-        The filepath of the sef file.
+    filename : str
+        The filename of the sef file.
 
     Returns
     -------
     raw : mne.io.RawArray
         RawArray containing the EEG signals.
     """
-    f = open(path, 'rb')
+    f = open(filename, 'rb')
     #   Read fixed part of the headerà
     version = f.read(4).decode('utf-8')
     n_channels,         = struct.unpack('I', f.read(4))
@@ -62,19 +62,20 @@ def read_sef(path):
                                    tm_isdst=-1)
     meas_date = (time.mktime(record_time), millisecond)
     ch_types = ['eeg' for i in range(n_channels)]
-    infos = create_info(ch_names=ch_names, sfreq=sfreq, description=description,
-                        ch_types=ch_types, meas_date=meas_date)
+    infos = create_info(ch_names=ch_names, sfreq=sfreq,
+                        description=description, ch_types=ch_types,
+                        meas_date=meas_date)
     raw = RawArray(np.transpose(data), infos)
     return (raw)
 
 
-def write_sef(path, raw):
+def write_sef(filename, raw):
     """Export a raw mne file to a sef file.
 
     Parameters
     ----------
-    path : str
-        File name of the exported dataset.
+    filename : str
+        Filename of the exported dataset.
     raw : instance of mne.io.Raw
         The raw data to export.
     """
@@ -85,7 +86,7 @@ def write_sef(path, raw):
     num_aux_electrodes = n_channels - len(mne.pick_types(info, meg=False,
                                                          eeg=True,
                                                          exclude=[""]))
-    f = open(path, 'wb')
+    f = open(filename, 'wb')
     f.write("SE01".encode('utf-8'))
     f.write(struct.pack('I', n_channels))
     f.write(struct.pack('I', num_aux_electrodes))

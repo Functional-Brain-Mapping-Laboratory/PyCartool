@@ -6,7 +6,7 @@ import struct
 import numpy as np
 
 
-def read_leadfield(filename):
+def read_lf(filename):
     """Read Cartool leadfield matrix.
 
     Parameters
