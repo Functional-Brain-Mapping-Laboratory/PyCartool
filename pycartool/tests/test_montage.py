@@ -7,7 +7,7 @@ import os
 import pytest
 
 from mne.channels.montage import Montage
-from ..io.montage import read_xyz_montage
+from ..io.montage import read_xyz
 
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
