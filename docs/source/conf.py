@@ -15,8 +15,7 @@ import sys
 curdir = os.path.dirname(__file__)
 
 sys.path.append(os.path.abspath(os.path.join(curdir, '..', 'pycartool')))
-sys.path.insert(0, os.path.abspath('../'))
-sys.path.insert(0, os.path.abspath('/home/ferat/Desktop/PyCartool'))
+sys.path.insert(0, os.path.abspath('../..'))
 # -- Project information -----------------------------------------------------
 
 project = 'PyCartool'
