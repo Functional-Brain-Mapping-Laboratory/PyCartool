@@ -3,8 +3,6 @@
 #          Victor Férat <victor.ferat@live.fr>
 #
 # License: BSD (3-clause)
-import csv
-import numpy as np
 
 
 def read_roi(filename):
@@ -33,7 +31,7 @@ def read_roi(filename):
         n_roi = int(f.readline().strip())
         print(f"Number of ROI: {n_roi}")
         rois = []
-        for i in range(0, n_roi):
+        for _ in range(0, n_roi):
             roi_name = f.readline().strip()
             roi_elem = f.readline().split(" ")[:-1]
             rois.append([roi_name, roi_elem])

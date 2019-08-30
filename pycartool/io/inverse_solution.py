@@ -57,32 +57,32 @@ def read_is(filename):
             print(f"Reading Variable Header...")
 
             ch_names = []
-            for k in range(n_channels):
+            for _ in range(n_channels):
                 name = [char for char in f.read(32).split(b'\x00')
                         if char != b''][0]
                 ch_names.append(name.decode('utf-8'))
 
             solutionpoints_names = []
-            for k in range(numsolutionpoints):
+            for _ in range(numsolutionpoints):
                 name = [char for char in f.read(16).split(b'\x00')
                         if char != b''][0]
                 solutionpoints_names.append(name.decode('utf-8'))
 
             regularizations_values = []
-            for k in range(numregularizations):
+            for _ in range(numregularizations):
                 value = struct.unpack('d', f.read(8))[0]
                 regularizations_values.append(value)
             print(f"Regularizations values: {regularizations_values}")
 
             regularizations_names = []
-            for k in range(numregularizations):
+            for _ in range(numregularizations):
                 name = [char for char in f.read(32).split(b'\x00')
                         if char != b''][0]
                 regularizations_names.append(name.decode('utf-8'))
             print(f"Regularizations names: {regularizations_names}")
 
             regularisation_solutions = []
-            for k in range(0, numregularizations):
+            for _ in range(0, numregularizations):
                 buf = f.read(n_dim * numsolutionpoints * n_channels * 4)
                 data = np.frombuffer(buf, dtype=np.float32)
                 data = data.reshape(n_dim, numsolutionpoints, n_channels)

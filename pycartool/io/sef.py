@@ -4,7 +4,6 @@
 #
 # License: BSD (3-clause)
 import struct
-import re
 import time
 
 import numpy as np
@@ -31,6 +30,9 @@ def read_sef(path):
     f = open(filename, 'rb')
     #   Read fixed part of the headerà
     version = f.read(4).decode('utf-8')
+    if version != "SE01":
+        priint(f"Version : {version} not supported")
+        raise ValueError()
     n_channels,         = struct.unpack('I', f.read(4))
     num_aux_electrodes, = struct.unpack('I', f.read(4))
     num_time_frames,    = struct.unpack('I', f.read(4))
@@ -45,7 +47,7 @@ def read_sef(path):
 
     #   Read variable part of the header
     ch_names = []
-    for k in range(n_channels):
+    for _ in range(n_channels):
         name = [char for char in f.read(8).split(b'\x00')
                 if char != b''][0]
         ch_names.append(name.decode('utf-8'))
