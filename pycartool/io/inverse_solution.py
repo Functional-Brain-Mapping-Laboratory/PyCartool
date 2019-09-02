@@ -24,14 +24,14 @@ def read_is(filename):
     with open(filename, "rb") as f:
         print(f"Reading {filename}")
         print(f"Reading Header...")
-        iso = [struct.unpack('c', f.read(1))[0].decode("utf-8")
-               for i in range(4)]
-        iso = ''.join(iso)
-        if iso not in ["IS01", "IS02", "IS03"]:
-            print(f"{iso} : Invalid ISO type, please check that input file is "
+        is_type = [struct.unpack('c', f.read(1))[0].decode("utf-8")
+                   for i in range(4)]
+        is_type = ''.join(is_type)
+        if is_type not in ["IS01", "IS02", "IS03"]:
+            print(f"{is_type} : Invalid IS type, please check that input file is "
                   "a Inverse Solution matrix")
             raise ValueError
-        print(f"ISO: {iso}")
+        print(f"IS type: {is_type}")
         n_channels = struct.unpack('I', f.read(4))[0]
         print(f"n_channels: {n_channels}")
         numsolutionpoints = struct.unpack('I', f.read(4))[0]
@@ -46,14 +46,14 @@ def read_is(filename):
             print(f"Inverse solution is Vectorial")
             n_dim = 3
 
-        if iso in ["IS01", "IS02"]:
+        if is_type in ["IS01", "IS02"]:
             regularisation_solutions = []
             buf = f.read(n_dim * numsolutionpoints * n_channel * 4)
             data = np.frombuffer(buf, dtype=np.float32)
             data = data.reshape(numsolutionpoints, ndim, n_channels)
             regularisation_solutions.append(data)
 
-        elif iso == "IS03":
+        elif is_type == "IS03":
             print(f"Reading Variable Header...")
 
             ch_names = []
@@ -88,4 +88,12 @@ def read_is(filename):
                 data = data.reshape(n_dim, numsolutionpoints, n_channels)
                 regularisation_solutions.append(data)
 
-    return(np.array(regularisation_solutions))
+    regularisation_solutions = np.array(regularisation_solutions)
+    inverse_solution = {"is_type": is_type,
+                        "is_scalar": True if isinversescalar == "0" else False,
+                        "ch_names": ch_names,
+                        "solutionpoints_names": solutionpoints_names,
+                        "regularizations_values": regularizations_values,
+                        "regularizations_names": regularizations_names,
+                        "regularisation_solutions": regularisation_solutions}
+    return(inverse_solution)
