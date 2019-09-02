@@ -13,4 +13,5 @@ data_path = os.path.join(dir_path, "data")
 def test_read_is():
     file_path = os.path.join(r"C:\Users\Victor Ferat\Desktop\MNI152.NlinAsym09c.257.5000.2019", "MNI152.NlinAsym09c.257.5000.2019.Loreta.is")
     inverse_solution = read_is(file_path)
-    assert(inverse_solution["is_type"] == "IS03")
+    if not inverse_solution["is_type"] == "IS03":
+        raise AssertionError()

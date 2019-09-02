@@ -28,8 +28,8 @@ def read_is(filename):
                    for i in range(4)]
         is_type = ''.join(is_type)
         if is_type not in ["IS01", "IS02", "IS03"]:
-            print(f"{is_type} : Invalid IS type, please check that input file is "
-                  "a Inverse Solution matrix")
+            print(f"{is_type} : Invalid IS type, please check that "
+                  "input file is a Inverse Solution matrix")
             raise ValueError
         print(f"IS type: {is_type}")
         n_channels = struct.unpack('I', f.read(4))[0]

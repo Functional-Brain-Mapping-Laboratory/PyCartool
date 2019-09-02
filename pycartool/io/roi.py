@@ -20,12 +20,11 @@ def read_roi(filename):
 
     """
     with open(filename) as f:
-        RO = f.readline().strip()
-        print(RO)
-        if RO != "RO01":
-            print(f"{RO} format not supported")
+        Roi_type = f.readline().strip()
+        if Roi_type != "RO01":
+            print(f"{Roi_type} format not supported")
             raise ValueError
-        print(RO)
+        print(Roi_type)
         n_orig = int(f.readline().strip())
         print(f"Dimension_of_original_data: {n_orig}")
         n_roi = int(f.readline().strip())

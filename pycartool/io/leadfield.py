@@ -27,6 +27,6 @@ def read_lf(filename):
         number_of_solution_points = struct.unpack('i', byte)[0]
         buf = f.read(number_of_electrodes * number_of_solution_points*8)
         data = np.frombuffer(buf, dtype=np.double)
-    number_of__points = int(number_of_solution_points/3)
-    data = data.reshape(number_of_electrodes, number_of__points, 3)
+    number_of_points = int(number_of_solution_points/3)
+    data = data.reshape(number_of_electrodes, number_of_points, 3)
     return(leadfield_matrix)
