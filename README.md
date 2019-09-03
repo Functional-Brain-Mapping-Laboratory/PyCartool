@@ -1,4 +1,5 @@
 [![Latest PyPI Release](https://img.shields.io/pypi/v/pycartool.svg)](https://pypi.org/project/pycartool/)
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/pycartool.svg)](https://pypi.python.org/pypi/pycartool/)
 [![Build Status](https://travis-ci.com/vferat/PyCartool.svg?branch=master)](https://travis-ci.com/vferat/PyCartool)
 [![codecov](https://codecov.io/gh/vferat/PyCartool/branch/master/graph/badge.svg)](https://codecov.io/gh/vferat/PyCartool)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/38a68c3012224c97827e10e7ca914a52)](https://www.codacy.com/app/vferat/PyCartool?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=vferat/PyCartool&amp;utm_campaign=Badge_Grade)
