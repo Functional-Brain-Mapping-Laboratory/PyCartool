@@ -14,6 +14,7 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 data_path = os.path.join(dir_path, "data")
 
 
+@pytest.mark.skip(reason="Requieres large file")
 def test_read_is():
     file_path = os.path.join(r"C:\Users\Victor Ferat\Desktop\MNI152.NlinAsym09c.257.5000.2019", "MNI152.NlinAsym09c.257.5000.2019.Loreta.is")
     inverse_solution = read_is(file_path)
