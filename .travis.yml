@@ -12,7 +12,6 @@ script:
   - pytest --cov-report term --cov=pycartool/tests/
 
 env:
-  - CODECOV_TOKEN=2edb5931-be93-4532-ba09-2beacb3d7817 #IF ONLY YOU HAVE A PRIVATE REPOSITORY
 
 after_success:
   - codecov
