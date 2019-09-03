@@ -4,8 +4,6 @@
 # License: BSD (3-clause)
 
 import os
-
-import matplotlib.pyplot as plt
 import numpy as np
 
 from ..io.inverse_solution import read_is, read_ris
