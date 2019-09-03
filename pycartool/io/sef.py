@@ -5,29 +5,29 @@
 # License: BSD (3-clause)
 import struct
 import time
-
+import datetime as dt
 import numpy as np
 import mne
 from mne.io import RawArray
 from mne import create_info
 
 
-def read_sef(filename):
+def read_sef(path):
     """
     Reads file with format .sef, and returns a mne.io.Raw object containing
     the data.
 
     Parameters
     ----------
-    filename : str
-        The filename of the sef file.
+    path : str
+        The path of the sef file.
 
     Returns
     -------
     raw : mne.io.RawArray
         RawArray containing the EEG signals.
     """
-    f = open(filename, 'rb')
+    f = open(path, 'rb')
     #   Read fixed part of the headerà
     version = f.read(4).decode('utf-8')
     if version != "SE01":
@@ -59,24 +59,28 @@ def read_sef(filename):
     data = np.reshape(buffer, (num_time_frames, n_channels))
     # Create infos
     description = "Imported from Pycartool"
-    record_time = time.struct_time(tm_year=year, tm_mon=month, tm_mday=day,
-                                   tm_hour=hour, tm_min=minute, tm_sec=second,
-                                   tm_isdst=-1)
-    meas_date = (time.mktime(record_time), millisecond)
+    try:
+        record_time = dt.datetime(year, month, day,
+                                  hour, minute, second).timetuple()
+        meas_date = (time.mktime(record_time), millisecond)
+    except Exception as e:
+        print("Cannot read recording date from file...")
+        meas_date = None
     ch_types = ['eeg' for i in range(n_channels)]
     infos = create_info(ch_names=ch_names, sfreq=sfreq,
-                        description=description, ch_types=ch_types,
-                        meas_date=meas_date)
+                        ch_types=ch_types)
+    infos["description"] = description
+    infos["meas_date"] = meas_date
     raw = RawArray(np.transpose(data), infos)
     return (raw)
 
 
-def write_sef(filename, raw):
+def write_sef(path, raw):
     """Export a raw mne file to a sef file.
 
     Parameters
     ----------
-    filename : str
+    path : str
         Filename of the exported dataset.
     raw : instance of mne.io.Raw
         The raw data to export.
@@ -88,7 +92,7 @@ def write_sef(filename, raw):
     num_aux_electrodes = n_channels - len(mne.pick_types(info, meg=False,
                                                          eeg=True,
                                                          exclude=[""]))
-    f = open(filename, 'wb')
+    f = open(path, 'wb')
     f.write("SE01".encode('utf-8'))
     f.write(struct.pack('I', n_channels))
     f.write(struct.pack('I', num_aux_electrodes))
