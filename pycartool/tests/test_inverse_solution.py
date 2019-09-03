@@ -4,6 +4,7 @@
 # License: BSD (3-clause)
 
 import os
+import pytest
 import numpy as np
 
 from ..io.inverse_solution import read_is, read_ris
