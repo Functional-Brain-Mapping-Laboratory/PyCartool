@@ -5,19 +5,7 @@
 
 Welcome to PyCartool's documentation!
 =====================================
-
-This is a test
-
 .. toctree::
    :maxdepth: 2
-   :numbered:
 
-   pycartool
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   pycartool.io

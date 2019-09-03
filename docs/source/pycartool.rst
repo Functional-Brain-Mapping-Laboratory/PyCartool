@@ -1,18 +1,10 @@
 pycartool package
 =================
 
-Subpackages
------------
+pycartool.io. module
+--------------------
 
-.. toctree::
-
-   pycartool.io
-   pycartool.tests
-
-Module contents
----------------
-
-.. automodule:: pycartool
+.. automodule:: pycartool.io
    :members:
    :undoc-members:
    :show-inheritance:

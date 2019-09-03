@@ -4,8 +4,8 @@
 #
 # License: BSD (3-clause)
 import struct
-import re
-
+import time
+import datetime as dt
 import numpy as np
 import mne
 from mne.io import RawArray
@@ -20,7 +20,7 @@ def read_sef(path):
     Parameters
     ----------
     path : str
-        The filepath of the sef file.
+        The path of the sef file.
 
     Returns
     -------
@@ -30,6 +30,9 @@ def read_sef(path):
     f = open(path, 'rb')
     #   Read fixed part of the headerà
     version = f.read(4).decode('utf-8')
+    if version != "SE01":
+        priint(f"Version : {version} not supported")
+        raise ValueError()
     n_channels,         = struct.unpack('I', f.read(4))
     num_aux_electrodes, = struct.unpack('I', f.read(4))
     num_time_frames,    = struct.unpack('I', f.read(4))
@@ -44,22 +47,30 @@ def read_sef(path):
 
     #   Read variable part of the header
     ch_names = []
-    for k in range(n_channels):
+    for _ in range(n_channels):
         name = [char for char in f.read(8).split(b'\x00')
                 if char != b''][0]
         ch_names.append(name.decode('utf-8'))
-
     # Read data
     buffer = np.frombuffer(
         f.read(n_channels * num_time_frames * 8),
         dtype=np.float32,
         count=n_channels * num_time_frames)
     data = np.reshape(buffer, (num_time_frames, n_channels))
-
+    # Create infos
+    description = "Imported from Pycartool"
+    try:
+        record_time = dt.datetime(year, month, day,
+                                  hour, minute, second).timetuple()
+        meas_date = (time.mktime(record_time), millisecond)
+    except Exception as e:
+        print("Cannot read recording date from file...")
+        meas_date = None
     ch_types = ['eeg' for i in range(n_channels)]
-    infos = create_info(
-        ch_names=ch_names, sfreq=sfreq,
-        ch_types=ch_types)
+    infos = create_info(ch_names=ch_names, sfreq=sfreq,
+                        ch_types=ch_types)
+    infos["description"] = description
+    infos["meas_date"] = meas_date
     raw = RawArray(np.transpose(data), infos)
     return (raw)
 
@@ -70,7 +81,7 @@ def write_sef(path, raw):
     Parameters
     ----------
     path : str
-        File name of the exported dataset.
+        Filename of the exported dataset.
     raw : instance of mne.io.Raw
         The raw data to export.
     """
