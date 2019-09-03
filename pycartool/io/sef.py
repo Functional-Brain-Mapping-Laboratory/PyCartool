@@ -12,7 +12,7 @@ from mne.io import RawArray
 from mne import create_info
 
 
-def read_sef(path):
+def read_sef(filename):
     """
     Reads file with format .sef, and returns a mne.io.Raw object containing
     the data.
