@@ -111,7 +111,7 @@ def read_ris(filename):
         n_solutionpoints = struct.unpack('I', f.read(4))[0]
         print(f"n_solutionpoints: {n_solutionpoints}")
         n_timeframes = struct.unpack('I', f.read(4))[0]
-        print(f"n_regularizations: {n_timeframes}")
+        print(f"n_timeframes: {n_timeframes}")
         s_freq = struct.unpack('f', f.read(4))[0]
         print(f"Samplimg frequency: {s_freq}")
         isinversescalar = struct.unpack('c', f.read(1))[0]
