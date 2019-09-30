@@ -18,6 +18,10 @@ def read_roi(filename):
     rois : list, shape(n_roi, 2)
         A list of ROIs which each element is a list [roi name, elements]
 
+    .. warning::  indexes start from 1, not 0 as Cartools does. When using
+                  with combination of source space, you way need to tranform
+                  to 0 base indices.
+
     """
     with open(filename) as f:
         Roi_type = f.readline().strip()
