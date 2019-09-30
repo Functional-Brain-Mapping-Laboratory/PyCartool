@@ -30,8 +30,7 @@ def read_spi(filename):
         coord = np.array(coord)
         coord = coord.astype(np.float)
         solution_points = {'names': names,
-                           'coordinates' = coord}
-
+                           'coordinates': coord}
     return(solution_points)
 
 
@@ -50,8 +49,8 @@ def write_spi(filename, solution_points):
                 the x,y,z coordinates of each solution point.
     """
     names = solution_points['names']
-    x, y, z = solution_points['coordinates']
-    with open(filename) as f:
+    x, y, z = solution_points['coordinates'].T
+    with open(filename, 'w', newline='') as f:
         writer = csv.writer(f, delimiter='\t')
         for i in range(0, len(names)):
-            writer.writerow([name[i], x[i], y[i], z[i]])
+            writer.writerow([x[i], y[i], z[i], names[i]])
