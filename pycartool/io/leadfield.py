@@ -20,7 +20,7 @@ def read_lf(filename):
         the leadfield matrix.
 
     """
-    with open(filename, "rb") as f:
+    with open(filename, 'rb') as f:
         byte = f.read(4)
         number_of_electrodes = struct.unpack('i', byte)[0]
         byte = f.read(4)
