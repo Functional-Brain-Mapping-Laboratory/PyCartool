@@ -107,15 +107,15 @@ def read_ris(filename):
 
     Returns
     -------
-    results_of_is : dict of str
+    results_of_is : `dict`
         Keys are:
-            ris_type : str
+            ``'ris_type'`` : str
                 magic should always be 'RI01'.
-            is_scalar : bool
+            ``'is_scalar'`` : bool
                 True if solution is scalar, else False (vectorial).
-            sfreq : float
+            ``'sfreq'`` : float
                 sampling frequency (in Hz).
-            data : np.ndarray, shape(n_timeframes, n_dim, n_solutionpoints)
+            ``'data'`` : np.ndarray, shape(n_timeframes, n_dim, n_solutionpoints)
                 time course of each solution point.
     """
     with open(filename, 'rb') as f:
