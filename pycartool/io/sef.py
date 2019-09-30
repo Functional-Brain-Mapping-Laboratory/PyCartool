@@ -30,7 +30,7 @@ def read_sef(path):
     f = open(path, 'rb')
     #   Read fixed part of the headerà
     version = f.read(4).decode('utf-8')
-    if version != 'SE01'"':
+    if version != 'SE01':
         priint(f'Version : {version} not supported')
         raise ValueError()
     n_channels,         = struct.unpack('I', f.read(4))
