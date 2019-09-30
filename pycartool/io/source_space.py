@@ -29,4 +29,28 @@ def read_spi(filename):
         coord = [elem[:-1] for elem in d]
         coord = np.array(coord)
         coord = coord.astype(np.float)
-    return(coord, names)
+        solution_points = {'names': names,
+                           'coordinates': coord}
+    return(solution_points)
+
+
+def write_spi(filename, solution_points):
+    """Write Cartool spi file.
+
+    Parameters
+    ----------
+    filename : str
+        The spi file to write.
+    solution_points : dict of str
+        The solution points info. Keys are:
+            names : list of str
+                the solutions point names.
+            coordinates : np.array, shape (n_solutions_points, 3)
+                the x,y,z coordinates of each solution point.
+    """
+    names = solution_points['names']
+    x, y, z = solution_points['coordinates'].T
+    with open(filename, 'w', newline='') as f:
+        writer = csv.writer(f, delimiter='\t')
+        for s in enumerate(zip(x, y, z, names)):
+            writer.writerow(s[1])

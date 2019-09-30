@@ -58,3 +58,6 @@ docs/_build/
 
 # PyBuilder
 target/
+test.sef
+pycartool/tests/data/sample_test_write_spi.spi
+pycartool/tests/data/sample_test_write_ris.ris
