@@ -52,5 +52,5 @@ def write_spi(filename, solution_points):
     x, y, z = solution_points['coordinates'].T
     with open(filename, 'w', newline='') as f:
         writer = csv.writer(f, delimiter='\t')
-        for i in range(0, len(names)):
-            writer.writerow([x[i], y[i], z[i], names[i]])
+        for s in enumerate(zip(x, y, z, names)):
+            writer.writerow(s[1])
