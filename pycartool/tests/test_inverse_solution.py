@@ -37,6 +37,9 @@ def test_write_ris():
     sfreq = 512
     write_ris(file_path, inverse_solution_computation, sfreq)
     read_results = read_ris(file_path)
-    assert read_results['ris_type'] == 'RI01'
-    assert (read_results['data'] == inverse_solution_computation.astype('float32')).all()
-    assert read_results['sfreq'] == sfreq
+    if not read_results['ris_type'] == 'RI01':
+        raise AssertionError()
+    if not (read_results['data'] == inverse_solution_computation.astype('float32')).all():
+        raise AssertionError()
+    if not read_results['sfreq'] == sfreq:
+        raise AssertionError()
