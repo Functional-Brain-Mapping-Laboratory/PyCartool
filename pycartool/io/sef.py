@@ -30,8 +30,8 @@ def read_sef(path):
     f = open(path, 'rb')
     #   Read fixed part of the headerà
     version = f.read(4).decode('utf-8')
-    if version != "SE01":
-        priint(f"Version : {version} not supported")
+    if version != 'SE01'"':
+        priint(f'Version : {version} not supported')
         raise ValueError()
     n_channels,         = struct.unpack('I', f.read(4))
     num_aux_electrodes, = struct.unpack('I', f.read(4))
@@ -58,19 +58,20 @@ def read_sef(path):
         count=n_channels * num_time_frames)
     data = np.reshape(buffer, (num_time_frames, n_channels))
     # Create infos
-    description = "Imported from Pycartool"
+    description = 'Imported with Pycartool'
     try:
         record_time = dt.datetime(year, month, day,
                                   hour, minute, second).timetuple()
         meas_date = (time.mktime(record_time), millisecond)
     except Exception as e:
-        print("Cannot read recording date from file...")
+        print('Cannot read recording date from file...')
+        print(e)
         meas_date = None
     ch_types = ['eeg' for i in range(n_channels)]
     infos = create_info(ch_names=ch_names, sfreq=sfreq,
                         ch_types=ch_types)
-    infos["description"] = description
-    infos["meas_date"] = meas_date
+    infos['description'] = description
+    infos['meas_date'] = meas_date
     raw = RawArray(np.transpose(data), infos)
     return (raw)
 
@@ -91,9 +92,9 @@ def write_sef(path, raw):
     sfreq = info['sfreq']
     num_aux_electrodes = n_channels - len(mne.pick_types(info, meg=False,
                                                          eeg=True,
-                                                         exclude=[""]))
+                                                         exclude=['']))
     f = open(path, 'wb')
-    f.write("SE01".encode('utf-8'))
+    f.write('SE01'.encode('utf-8'))
     f.write(struct.pack('I', n_channels))
     f.write(struct.pack('I', num_aux_electrodes))
     f.write(struct.pack('I', num_freq_frames))
@@ -106,7 +107,7 @@ def write_sef(path, raw):
     f.write(struct.pack('H', 0))
     f.write(struct.pack('H', 0))
 
-    ch_names = info["ch_names"]
+    ch_names = info['ch_names']
     for k in range(n_channels):
         ch_name = ch_names[k]
         ch_name = ch_name.ljust(8)
