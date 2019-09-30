@@ -21,17 +21,17 @@ def read_roi(filename):
     """
     with open(filename) as f:
         Roi_type = f.readline().strip()
-        if Roi_type != "RO01":
-            print(f"{Roi_type} format not supported")
+        if Roi_type != 'RO01':
+            print(f'{Roi_type} format not supported')
             raise ValueError
         print(Roi_type)
         n_orig = int(f.readline().strip())
-        print(f"Dimension_of_original_data: {n_orig}")
+        print(f'Dimension_of_original_data: {n_orig}')
         n_roi = int(f.readline().strip())
-        print(f"Number of ROI: {n_roi}")
+        print(f'Number of ROI: {n_roi}')
         rois = []
         for _ in range(0, n_roi):
             roi_name = f.readline().strip()
-            roi_elem = f.readline().split(" ")[:-1]
+            roi_elem = f.readline().split(' ')[:-1]
             rois.append([roi_name, roi_elem])
         return(rois)

@@ -8,7 +8,7 @@ import numpy as np
 
 
 def read_spi(filename):
-    """Read Cartool spi file".
+    """Read Cartool spi file.
 
     Parameters
     ----------
@@ -23,7 +23,7 @@ def read_spi(filename):
 
     """
     with open(filename) as f:
-        reader = csv.reader(f, delimiter="\t")
+        reader = csv.reader(f, delimiter='\t')
         d = list(reader)
         names = [elem[-1] for elem in d]
         coord = [elem[:-1] for elem in d]
