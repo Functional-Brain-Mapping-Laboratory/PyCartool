@@ -13,5 +13,7 @@ data_path = os.path.join(dir_path, "data")
 def test_read_roi():
     file_path = os.path.join(data_path, "sample_test_roi.rois")
     rois = read_roi(file_path)
-    if not len(rois) == 32:
+    if not len(rois['names']) == 32:
+        raise AssertionError()
+    if not len(rois['elements']) == 32:
         raise AssertionError()
