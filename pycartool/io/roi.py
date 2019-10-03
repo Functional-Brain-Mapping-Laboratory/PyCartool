@@ -15,8 +15,12 @@ def read_roi(filename):
 
     Returns
     -------
-    rois : list, shape(n_roi, 2)
-        A list of ROIs which each element is a list [roi name, elements]
+    Rois : dict of str
+        The Rois info info. Keys are:
+            names : list of str
+                the rois names.
+            elements :list of int
+                the indices of elements belonging to each rois (indice start to 1).
 
     Warning
     -------
@@ -35,9 +39,13 @@ def read_roi(filename):
         print(f'Dimension_of_original_data: {n_orig}')
         n_roi = int(f.readline().strip())
         print(f'Number of ROI: {n_roi}')
-        rois = []
+        rois_name = []
+        rois_elements = []
         for _ in range(0, n_roi):
             roi_name = f.readline().strip()
             roi_elem = f.readline().split(' ')[:-1]
-            rois.append([roi_name, roi_elem])
-        return(rois)
+            rois_name.append(roi_name)
+            rois_elements.append(roi_elem)
+        Rois = {'names': rois_name,
+                'elements': rois_elements}
+        return(Rois)
