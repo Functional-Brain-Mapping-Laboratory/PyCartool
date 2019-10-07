@@ -7,4 +7,4 @@
 ![License](https://img.shields.io/badge/license-BSD-green.svg)
 
 # PyCartool
-A simple open source Python package for I/O between Cartool and MNE ( and more generally python)
+A simple open source Python package for I/O between Cartool and python
