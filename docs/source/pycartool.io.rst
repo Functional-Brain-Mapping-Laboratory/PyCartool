@@ -1,9 +1,6 @@
 pycartool.io package
 ====================
 
-Submodules
-----------
-
 pycartool.io.montage module
 ---------------------------
 
@@ -28,14 +25,6 @@ pycartool.io.roi module
    :undoc-members:
    :show-inheritance:
 
-
-pycartool.io.source_space module
---------------------------------
-
-.. automodule:: pycartool.io.source_space
-   :members:
-   :undoc-members:
-   :show-inheritance:
 
 pycartool.io.inverse_solution module
 ------------------------------------
