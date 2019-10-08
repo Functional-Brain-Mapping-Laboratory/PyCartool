@@ -15,9 +15,9 @@ def test_read_spi():
     """Test read_spi"""
     file_path = os.path.join(data_path, 'sample_test_spi.spi')
     Source_space = read_spi(file_path)
-    if not len(Source_space.get_names()) == 5006:
+    if not len(Source_space.names) == 5006:
         raise AssertionError()
-    if not Source_space.get_coordinates().shape == (5006, 3):
+    if not Source_space.coordinates.shape == (5006, 3):
         raise AssertionError()
 
 
@@ -28,18 +28,18 @@ def test_SourceSpace():
     Source_space = SourceSpace(names, coordinates)
 
     new_coordinates = np.random.rand(5000, 3)
-    Source_space.set_coordinates(new_coordinates)
-    if not (Source_space.get_coordinates() == new_coordinates).all():
+    Source_space.coordinates = new_coordinates
+    if not (Source_space.coordinates == new_coordinates).all():
         raise AssertionError()
 
     new_names = [('F' + str(i)) for i in range(0, 5000)]
-    Source_space.set_names(new_names)
-    if not (Source_space.get_names() == new_names):
+    Source_space.names = new_names
+    if not (Source_space.names == new_names):
         raise AssertionError()
 
     subject = 'test_subject'
-    Source_space.set_subject(subject)
-    if not (Source_space.get_subject() == subject):
+    Source_space.subject = subject
+    if not (Source_space.subject == subject):
         raise AssertionError()
 
 
@@ -51,7 +51,7 @@ def test_write_spi():
     Source_space = SourceSpace(names, coordinates)
     write_spi(filename, Source_space)
     Read_Source_space = read_spi(filename)
-    if names != Read_Source_space.get_names():
+    if names != Read_Source_space.names:
         raise AssertionError
-    if (coordinates != Read_Source_space.get_coordinates()).any():
+    if (coordinates != Read_Source_space.coordinates).any():
         raise AssertionError

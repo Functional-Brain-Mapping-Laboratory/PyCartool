@@ -3,7 +3,7 @@ import csv
 import copy
 
 
-def _check_coordinates(coordinates):
+def _checkcoordinates(coordinates):
     if not isinstance(coordinates, np.ndarray):
         raise TypeError(f'coordinates must be a numpy array')
     if not coordinates.ndim == 2:
@@ -14,13 +14,13 @@ def _check_coordinates(coordinates):
     return (coordinates)
 
 
-def _check_names(names):
+def _checknames(names):
     if not isinstance(names, list):
         raise TypeError(f'names must be a list of string')
     return(names)
 
 
-def _check_subject(subject):
+def _checksubject(subject):
     if subject is not None:
         if not isinstance(subject, str):
             raise ValueError(f'Subject must be a string but type '
@@ -88,8 +88,8 @@ class SourceSpace(object):
         If loaded from a file, the corresponding filename.
     """
     def __init__(self, names, coordinates, subject=None, filename=None):
-        _check_coordinates(coordinates)
-        _check_names(names)
+        _checkcoordinates(coordinates)
+        _checknames(names)
         if not len(names) == coordinates.shape[0]:
             raise ValueError(f'coordinates and names dimesions must match'
                              f' but found {len(names)} names and '
@@ -98,83 +98,26 @@ class SourceSpace(object):
         else:
             self.n_sources = len(names)
 
-        self._subject = subject
-        self._names = names
-        self._coordinates = coordinates
-        self._filename = filename
+        self.subject = subject
+        self.names = names
+        self.coordinates = coordinates
+        self.filename = filename
 
     def __repr__(self):
         s = f'{self.n_sources} sources'
-        if self._subject is not None:
-            s += f', subject : {self._subject}'
-        if self._filename is not None:
-            s += f', filename : {self._filename}'
-        return(f'<SourceSpace | {s} ')
+        if self.subject is not None:
+            s += f', subject : {self.subject}'
+        if self.filename is not None:
+            s += f', filename : {self.filename}'
+        return(f'<SourceSpace | {s}>')
 
     def get_coordinates(self):
-        """Get sources coordinates."""
-        return (copy.deepcopy(self._coordinates))
+        """Return a copy of sources coordinates."""
+        return (copy.deepcopy(self.coordinates))
 
     def get_names(self):
-        """Get sources names."""
-        return(copy.deepcopy(self._names))
-
-    def get_subject(self):
-        """Get the subject used to create the source space."""
-        return(copy.deepcopy(self._subject))
-
-    def set_coordinates(self, coordinates):
-        """Set sources coordinates.
-
-        Parameters
-        ----------
-        coordinates : ndarray, shape (n_sources, 3)
-            The solutions point names coordinates.
-
-        """
-
-        _check_coordinates(coordinates)
-        if not len(self._names) == coordinates.shape[0]:
-            raise ValueError(f'coordinates shape must match names length '
-                             f'but found {len(names)} names and '
-                             f'{coordinates.shape[0]} solution points '
-                             f'coordinates. If you want to change both '
-                             f'coordinates and names, create a new instance of'
-                             f' SourceSpace instead.')
-        self._coordinates = coordinates
-        return()
-
-    def set_names(self, names):
-        """Set sources names.
-
-        Parameters
-        ----------
-        names : list of str, lenght (n_sources)
-            The solutions point names.
-
-        """
-        _check_names(names)
-        if not len(names) == self._coordinates.shape[0]:
-            raise ValueError(f'names length must match coordinates shape '
-                             f'but found {len(names)} names and '
-                             f'{coordinates.shape[0]} solution points '
-                             f'coordinates. If you want to change both '
-                             f'coordinates and names, create a new instance of'
-                             f' SourceSpace instead.')
-        self._names = names
-        return()
-
-    def set_subject(self, subject):
-        """Set the subject used to create the source space.
-
-        Parameters
-        ----------
-        subject : str
-            Subject from who the source space was created.
-
-        """
-        _check_subject(subject)
-        self._subject = subject
+        """Return a copy of sources names."""
+        return(copy.deepcopy(self.names))
 
     def save(self, filename):
         """Write SourceSpace to Cartool spi file.
