@@ -1,5 +1,5 @@
-pycartool.source_space module
------------------------------
+pycartool.source_space
+----------------------
 
 .. automodule:: pycartool.source_space
    :members:

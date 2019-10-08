@@ -1,5 +1,5 @@
-pycartool.source_estimate module
---------------------------------
+pycartool.source_estimate
+-------------------------
 
 .. automodule:: pycartool.source_estimate
    :members:
