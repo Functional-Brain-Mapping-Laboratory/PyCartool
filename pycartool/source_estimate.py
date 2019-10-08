@@ -67,7 +67,7 @@ def read_ris(filename, source_space=None, subject=None):
 
 
 def write_ris(source_estimate, filename):
-    """Short summary.
+    """Write SourceEstimate instance to file.
 
     Parameters
     ----------
@@ -104,7 +104,36 @@ def write_ris(source_estimate, filename):
 
 
 class SourceEstimate():
-    """Container for source estimate data."""
+    """Container for source estimate data.
+
+    Parameters
+    ----------
+    sources_tc : numpy.ndarray, shape (n_solutionpoints, n_dim, n_timeframes)
+        The sources time courses. Can be either scalar (ndim=1) or
+         vectorial (ndim=3).
+    sfreq : float
+        The sampling frequency.
+    source_space : pycartool.source_space.SourceSpace
+        The SourceSpace corresponding to the source estimate.
+    subject : str
+        The subject used to create the source estimate.
+    filename : str
+        filename from wich the source estimate was imported.
+
+    Attributes
+    ----------
+    is_scalar : bool
+        True if estimate is scalar, False is estimate is vectorial.
+    n_sources : int
+        Number of sources.
+    sources_tc
+    source_space
+    sfreq
+    subject
+    filename
+
+    """
+
     def __init__(self, sources_tc, sfreq,
                  source_space=None, subject=None, filename=None):
         _check_sources_tc(sources_tc)

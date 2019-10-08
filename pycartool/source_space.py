@@ -86,6 +86,16 @@ class SourceSpace(object):
         Subject from who the source space was created.
     filename : str
         If loaded from a file, the corresponding filename.
+
+    Attributes
+    ----------
+    n_sources : int
+        DNumber of sources.
+    subject
+    names
+    coordinates
+    filename
+
     """
     def __init__(self, names, coordinates, subject=None, filename=None):
         _checkcoordinates(coordinates)
