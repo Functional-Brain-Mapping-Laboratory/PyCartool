@@ -9,3 +9,4 @@ Welcome to PyCartool's documentation!
    :maxdepth: 2
 
    pycartool.io
+   pycartool.source_space
