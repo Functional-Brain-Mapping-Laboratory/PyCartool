@@ -74,7 +74,19 @@ def write_spi(filename, SourceSpace):
 
 
 class SourceSpace(object):
-    """Container for source space data."""
+    """Container for source space data.
+
+    Parameters
+    ----------
+    names : list of str, lenght (n_sources)
+        The solutions point names.
+    coordinates : ndarray, shape (n_sources, 3)
+        The solutions point names coordinates.
+    subject : str
+        Subject from who the source space was created.
+    filename : str
+        If loaded from a file, the corresponding filename.
+    """
     def __init__(self, names, coordinates, subject=None, filename=None):
         _check_coordinates(coordinates)
         _check_names(names)
@@ -112,7 +124,15 @@ class SourceSpace(object):
         return(copy.deepcopy(self._subject))
 
     def set_coordinates(self, coordinates):
-        """Set sources coordinates."""
+        """Set sources coordinates.
+
+        Parameters
+        ----------
+        coordinates : ndarray, shape (n_sources, 3)
+            The solutions point names coordinates.
+
+        """
+
         _check_coordinates(coordinates)
         if not len(self._names) == coordinates.shape[0]:
             raise ValueError(f'coordinates shape must match names length '
@@ -125,7 +145,14 @@ class SourceSpace(object):
         return()
 
     def set_names(self, names):
-        """Set sources names."""
+        """Set sources names.
+
+        Parameters
+        ----------
+        names : list of str, lenght (n_sources)
+            The solutions point names.
+
+        """
         _check_names(names)
         if not len(names) == self._coordinates.shape[0]:
             raise ValueError(f'names length must match coordinates shape '
@@ -138,10 +165,24 @@ class SourceSpace(object):
         return()
 
     def set_subject(self, subject):
-        """Set the subject used to create the source space."""
+        """Set the subject used to create the source space.
+
+        Parameters
+        ----------
+        subject : str
+            Subject from who the source space was created.
+
+        """
         _check_subject(subject)
         self._subject = subject
 
     def save(self, filename):
-        """Save the source space to spi file."""
+        """Write SourceSpace to Cartool spi file.
+
+        Parameters
+        ----------
+        filename : str
+            The spi file to write.
+
+        """
         write_spi(filename, self)
