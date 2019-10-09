@@ -90,7 +90,7 @@ class SourceSpace(object):
     Attributes
     ----------
     n_sources : int
-        DNumber of sources.
+        Number of sources.
     subject
     names
     coordinates

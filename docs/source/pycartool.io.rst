@@ -17,15 +17,6 @@ pycartool.io.sef
    :undoc-members:
    :show-inheritance:
 
-pycartool.io.roi
-----------------
-
-.. automodule:: pycartool.io.roi
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-
 pycartool.io.inverse_solution
 -----------------------------
 
