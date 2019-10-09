@@ -1,6 +1,6 @@
 import struct
 import numpy as np
-from .source_space import write_spi
+from .source_space import write_spi, SourceSpace
 
 
 def _check_sources_tc(sources_tc):
@@ -103,7 +103,7 @@ def write_ris(source_estimate, filename):
     f.close()
 
 
-class SourceEstimate():
+class SourceEstimate(object):
     """Container for source estimate data.
 
     Parameters
@@ -139,7 +139,7 @@ class SourceEstimate():
         _check_sources_tc(sources_tc)
         # Check that source estimate correspond to source space
         if source_space is not None:
-            if not isinstance(source_space, Sourcespace):
+            if not isinstance(source_space, SourceSpace):
                 raise TypeError(f'sourcespace must be an instance'
                                 f' of SourceSpace.')
             if not len(source_space.names) == sources_tc.shape[0]:
@@ -188,3 +188,28 @@ class SourceEstimate():
             else:
                 raise ValueError('Cannot save source space to file, source '
                                  'space is not defined')
+
+    def per_roi(self, region_of_interest):
+        # Check is SourceSpace are the equals.
+        if self.source_space is None:
+            raise ValueError('Source spaces must be defined')
+        if region_of_interest.source_space is None:
+            raise ValueError('Source spaces must be defined')
+        if self.source_space != region_of_interest.source_space:
+            raise ValueError('Source estimate and Regions of interest must '
+                             'share the same source space')
+
+        rois_source_estimate = []
+        rois_names = region_of_interest.names
+        for r, _ in enumerate(rois_names):
+            indices = region_of_interest.groups_of_indexes[r]
+            roi_sources_tc = self.sources_tc[indices, :, :]
+            roi_sources_pos = self.source_space.coordinates[indices]
+            roi_sources_names = [self.source_space.names[i] for i in indices]
+            source_space = SourceSpace(roi_sources_names, roi_sources_pos)
+            source_estimate = SourceEstimate(roi_sources_tc, self.sfreq,
+                                             source_space=source_space,
+                                             subject=self.subject,
+                                             filename=None)
+            rois_source_estimate.append(source_estimate)
+        return(rois_source_estimate)

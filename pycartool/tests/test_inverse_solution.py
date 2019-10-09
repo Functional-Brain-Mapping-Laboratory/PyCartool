@@ -9,7 +9,8 @@ import numpy as np
 
 from ..io.inverse_solution import read_is
 from ..source_estimate import read_ris, SourceEstimate
-
+from ..regions_of_interest import RegionsOfInterest
+from ..source_space import SourceSpace
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 data_path = os.path.join(dir_path, 'data')
@@ -44,4 +45,27 @@ def test_write_ris():
     if not read_source_estimate.sfreq == sfreq:
         raise AssertionError()
     if not read_source_estimate.filename == file_path:
+        raise AssertionError()
+
+
+def test_per_roi():
+    # Generate Source space
+    source_names = [('S' + str(i)) for i in range(0, 5000)]
+    source_coords = np.random.rand(5000, 3)
+    source_space = SourceSpace(source_names, source_coords)
+    # Generate Source Estimate
+    sources_tc = np.random.rand(5000, 3, 2048)
+    sfreq = 512
+    source_estimate = SourceEstimate(sources_tc, sfreq,
+                                     source_space=source_space)
+    # Generate Rois
+    rois_names = [('R' + str(i)) for i in range(0, 32)]
+    roi_indices = []
+    for i in range(0, 32):
+        indices = np.random.randint(0, 5000, size=i+1).tolist()
+        roi_indices.append(indices)
+    regions_of_interest = RegionsOfInterest(rois_names, roi_indices,
+                                            source_space=source_space)
+    rois_estimates = source_estimate.per_roi(regions_of_interest)
+    if not len(rois_estimates) == 32:
         raise AssertionError()

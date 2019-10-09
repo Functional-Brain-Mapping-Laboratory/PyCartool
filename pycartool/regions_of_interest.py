@@ -1,3 +1,6 @@
+from .source_space import SourceSpace
+
+
 def read_roi(filename, source_space=None):
     """Read Cartool region of interest (.rois) files.
 
@@ -64,19 +67,19 @@ def _compute_number_of_sources(groups_of_indexes):
     return(maximum)
 
 
-class RegionsOfInterest():
+class RegionsOfInterest(object):
     def __init__(self, names, groups_of_indexes,
                  source_space=None, filename=None):
         _check_groups_of_indexes(groups_of_indexes)
-        max = _compute_number_of_sources(groups_of_indexes)
+        maximum = _compute_number_of_sources(groups_of_indexes)
         # Check that groups_of_indexes correspond to source space.
         if source_space is not None:
-            if not isinstance(source_space, Sourcespace):
+            if not isinstance(source_space, SourceSpace):
                 raise TypeError(f'sourcespace must be an instance'
                                 f' of SourceSpace.')
-            if source_space.n_sources < max:
-                raise ValueError(f'Indice {max} found in groups_of_indexes but'
-                                 f' SourceSpace contain only'
+            if source_space.n_sources < maximum:
+                raise ValueError(f'Indice {maximum} found in groups_of_indexes'
+                                 f' but SourceSpace contains only'
                                  f' {source_space.n_sources} sources.')
 
         self.names = names
