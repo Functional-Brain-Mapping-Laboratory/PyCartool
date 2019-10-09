@@ -11,6 +11,7 @@ data_path = os.path.join(dir_path, "data")
 
 
 def test_read_roi():
+    """Test read_roi"""
     file_path = os.path.join(data_path, "sample_test_roi.rois")
     rois = read_roi(file_path)
     if not len(rois.names) == 32:
