@@ -11,3 +11,4 @@ Welcome to PyCartool's documentation!
    pycartool.io
    pycartool.source_space
    pycartool.source_estimate
+   pycartool.regions_of_interest

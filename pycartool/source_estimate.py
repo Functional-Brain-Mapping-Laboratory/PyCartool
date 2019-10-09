@@ -130,11 +130,15 @@ class SourceEstimate(object):
         True if estimate is scalar, False is estimate is vectorial.
     n_sources : int
         Number of sources.
-    sources_tc
-    source_space
-    sfreq
-    subject
-    filename
+    sources_tc : numpy.ndarray, shape (n_solutionpoints, n_dim, n_timeframes)
+        The sources time courses. Can be either scalar (ndim=1) or
+         vectorial (ndim=3).
+    source_space : pycartool.source_space.SourceSpace
+        The SourceSpace corresponding to the source estimate.
+    subject : str
+        The subject used to create the source estimate.
+    filename : str
+        filename from wich the source estimate was imported.
 
     """
 
@@ -194,6 +198,20 @@ class SourceEstimate(object):
                                  'space is not defined')
 
     def per_roi(self, region_of_interest):
+        """Short summary.
+
+        Parameters
+        ----------
+        region_of_interest : pycartool.region_of_interest.RegionOfInterest
+            The region of interest used to split the source estimate.
+
+        Returns
+        -------
+        rois_source_estimate : list of pycartool.source_estimate.SourceEstimate
+            A list of Source estimate instance restricted to a Region of
+            interest
+
+        """
         # Check is SourceSpace are the equals.
         if self.source_space is None:
             raise ValueError('Source spaces must be defined')
@@ -218,7 +236,22 @@ class SourceEstimate(object):
             rois_source_estimate.append(source_estimate)
         return(rois_source_estimate)
 
-    def compute_tc(self, method='mean'):
+    def compute_tc(self, method='svd'):
+        """Short summary.
+
+        Parameters
+        ----------
+        method : str
+            the method use to compute the time course. Can be either 'mean',
+            'median' or 'svd'. Default to 'svd'.
+
+        Returns
+        -------
+        tc : np.ndarray, shape(n_dim, n_times)
+            The global source estimate time course. Can be either Vectorial or
+             Scalar depending of the source estimate and the method.
+
+        """
         _check_method(method)
         if method == 'median':
             tc = np.median(self.sources_tc, axis=0)
@@ -232,7 +265,24 @@ class SourceEstimate(object):
             tc = np.array([scale * V[0]])
         return(tc)
 
-    def compute_rois_tc(self, region_of_interest):
+    def compute_rois_tc(self, region_of_interest, method='svd'):
+        """Short summary.
+
+        Parameters
+        ----------
+        region_of_interest : pycartool.region_of_interest.RegionOfInterest
+            The region of interest used to split the source estimate.
+        method : str
+            the method use to compute the time course. Can be either 'mean',
+            'median' or 'svd'. Default to 'svd'.
+
+        Returns
+        -------
+        Roi_source_estimate : pycartool.source_space.SourceEstimate
+            A source estimate instance where each source correspond to a region
+            of interest.
+
+        """
         rois_names = region_of_interest.names
         rois_estimates = self.per_roi(region_of_interest)
         rois_tc = np.array([roi.compute_tc() for roi in rois_estimates])

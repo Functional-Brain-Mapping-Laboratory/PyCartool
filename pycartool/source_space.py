@@ -91,10 +91,14 @@ class SourceSpace(object):
     ----------
     n_sources : int
         Number of sources.
-    subject
-    names
-    coordinates
-    filename
+    names : list of str, lenght (n_sources)
+        The solutions point names.
+    coordinates : ndarray, shape (n_sources, 3)
+        The solutions point names coordinates.
+    subject : str
+        Subject from who the source space was created.
+    filename : str
+        If loaded from a file, the corresponding filename.
 
     """
     def __init__(self, names, coordinates, subject=None, filename=None):

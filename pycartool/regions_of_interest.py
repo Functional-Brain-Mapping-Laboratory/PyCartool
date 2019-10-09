@@ -68,6 +68,31 @@ def _compute_number_of_sources(groups_of_indexes):
 
 
 class RegionsOfInterest(object):
+    """Container for regions of interest.
+
+    Parameters
+    ----------
+    names : list of str
+        The regions of interest names.
+    groups_of_indexes : list of list (of int)
+        The sources indices belonging to each region of interest.
+    source_space : pycartool.source_space.SourceSpace
+        The source space associated to the regions of interest.
+    filename : str
+        The .roi file from with the data has beem extracted.
+
+    Attributes
+    ----------
+    names : list of str
+        The regions of interest names.
+    groups_of_indexes : list of list (of int)
+        The sources indices belonging to each region of interest.
+    source_space : pycartool.source_space.SourceSpace
+        The source space associated to the regions of interest.
+    filename : str
+        The .roi file from with the data has beem extracted.
+
+    """
     def __init__(self, names, groups_of_indexes,
                  source_space=None, filename=None):
         _check_groups_of_indexes(groups_of_indexes)
