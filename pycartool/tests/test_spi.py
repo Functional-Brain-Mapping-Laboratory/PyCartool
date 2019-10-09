@@ -43,6 +43,18 @@ def test_SourceSpace():
         raise AssertionError()
 
 
+def test_SourceSpace_get_center_of_mass():
+    coordinates = np.random.rand(5000, 3)
+    mean = np.mean(coordinates, axis=0)
+    med = np.median(coordinates, axis=0)
+    names = [('S' + str(i)) for i in range(0, 5000)]
+    Source_space = SourceSpace(names, coordinates)
+    if not (Source_space.get_center_of_mass(method='mean') == mean).all:
+        raise AssertionError()
+    if not (Source_space.get_center_of_mass(method='median') == med).all:
+        raise AssertionError()
+
+
 def test_write_spi():
     """Test write_spi"""
     filename = os.path.join(data_path, 'sample_test_write_spi.spi')

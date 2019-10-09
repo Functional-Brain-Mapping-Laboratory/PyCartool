@@ -3,6 +3,10 @@ import numpy as np
 from .source_space import write_spi, SourceSpace
 
 
+def _check_method(method):
+    if method not in ['svd', 'mean', 'median']:
+        raise ValueError('Method must be either svd, mean, or median')
+
 def _check_sources_tc(sources_tc):
     if not isinstance(sources_tc, np.ndarray):
         raise TypeError(f'sources_tc must be an instance of numpy.ndarray')
@@ -213,3 +217,28 @@ class SourceEstimate(object):
                                              filename=None)
             rois_source_estimate.append(source_estimate)
         return(rois_source_estimate)
+
+    def compute_tc(self, method='mean'):
+        _check_method(method)
+        if method == 'median':
+            tc = np.median(self.sources_tc, axis=0)
+        elif method == 'mean':
+            tc = np.mean(self.sources_tc, axis=0)
+        elif method == 'svd':
+            n_times = self.sources_tc.shape[-1]
+            sources_tc_flat = self.sources_tc.reshape(-1, n_times)
+            U, s, V = np.linalg.svd(sources_tc_flat, full_matrices=False)
+            scale = np.linalg.norm(s) / np.sqrt(len(sources_tc_flat))
+            tc = np.array([scale * V[0]])
+        return(tc)
+
+    def compute_rois_tc(self, region_of_interest):
+        rois_names = region_of_interest.names
+        rois_estimates = self.per_roi(region_of_interest)
+        rois_tc = np.array([roi.compute_tc() for roi in rois_estimates])
+        rois_coordinates = np.array([estimate.source_space.get_center_of_mass()
+                                     for estimate in rois_estimates])
+        Roi_source_space = SourceSpace(rois_names, rois_coordinates)
+        Roi_source_estimate = SourceEstimate(rois_tc, self.sfreq,
+                                             source_space=Roi_source_space)
+        return(Roi_source_estimate)

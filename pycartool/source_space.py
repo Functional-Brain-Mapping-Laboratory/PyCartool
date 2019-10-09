@@ -139,3 +139,10 @@ class SourceSpace(object):
 
         """
         write_spi(filename, self)
+
+    def get_center_of_mass(self, method='mean'):
+        if method == 'mean':
+            center_of_mass = np.mean(self.coordinates, axis=0)
+        elif method == 'median':
+            center_of_mass = np.median(self.coordinates, axis=0)
+        return(center_of_mass)
