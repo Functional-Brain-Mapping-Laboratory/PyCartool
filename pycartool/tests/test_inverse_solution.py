@@ -65,7 +65,7 @@ def test_write_ris():
     source_estimate = SourceEstimate(sources_tc, sfreq, subject=subject)
     source_estimate.save(file_path)
     read_source_estimate = read_ris(file_path)
-    if not read_source_estimate.sources_tc == sources_tc.all():
+    if not (read_source_estimate.sources_tc == sources_tc).all():
         raise AssertionError()
     if not read_source_estimate.sfreq == sfreq:
         raise AssertionError()
@@ -96,7 +96,7 @@ def test_compute_rois_tc():
     regions_of_interest = generate_rois(32, 5000)
     regions_of_interest.source_space = source_space
     rois_estimates = source_estimate.compute_rois_tc(regions_of_interest)
-    if not rois_estimates.sources_tc.shape == (32, 3, 2048):
+    if not rois_estimates.sources_tc.shape == (32, 1, 2048):
         raise AssertionError()
     if not rois_estimates.sfreq == 512:
         raise AssertionError()
