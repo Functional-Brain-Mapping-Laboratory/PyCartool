@@ -2,7 +2,6 @@
 # Authors: Victor Férat <victor.ferat@live.fr>
 #
 # License: BSD (3-clause)
-
 import os
 import numpy as np
 from ..source_space import SourceSpace, read_spi, write_spi

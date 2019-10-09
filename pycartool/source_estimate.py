@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+# Authors: Victor Férat <victor.ferat@live.fr>
+#
+# License: BSD (3-clause)
 import struct
 import numpy as np
 from .source_space import write_spi, SourceSpace
@@ -6,6 +10,7 @@ from .source_space import write_spi, SourceSpace
 def _check_method(method):
     if method not in ['svd', 'mean', 'median']:
         raise ValueError('Method must be either svd, mean, or median')
+
 
 def _check_sources_tc(sources_tc):
     if not isinstance(sources_tc, np.ndarray):

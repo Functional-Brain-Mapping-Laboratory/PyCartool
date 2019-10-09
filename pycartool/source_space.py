@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+# Authors: Victor Férat <victor.ferat@live.fr>
+#
+# License: BSD (3-clause)
 import numpy as np
 import csv
 import copy

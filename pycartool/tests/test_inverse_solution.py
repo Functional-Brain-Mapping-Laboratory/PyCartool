@@ -2,7 +2,6 @@
 # Authors: Victor Férat <victor.ferat@live.fr>
 #
 # License: BSD (3-clause)
-
 import os
 import pytest
 import numpy as np
@@ -17,7 +16,7 @@ data_path = os.path.join(dir_path, 'data')
 
 
 def generate_source_space(size):
-    # Generate Source space
+    """Generate Source space."""
     source_names = [('S' + str(i)) for i in range(0, size)]
     source_coords = np.random.rand(size, 3)
     source_space = SourceSpace(source_names, source_coords)
@@ -25,13 +24,14 @@ def generate_source_space(size):
 
 
 def generate_source_estimate(n_sources, n_times, sfreq):
+    """Generate Source Estimate."""
     sources_tc = np.random.rand(n_sources, 3, n_times)
     source_estimate = SourceEstimate(sources_tc, sfreq)
     return(source_estimate)
 
 
 def generate_rois(n_roi, n_sources):
-    # Generate Rois
+    """Generate Rois."""
     rois_names = [('R' + str(i)) for i in range(0, n_roi)]
     roi_indices = []
     for i in range(0, n_roi):
@@ -41,32 +41,31 @@ def generate_rois(n_roi, n_sources):
     return(regions_of_interest)
 
 
-
 @pytest.mark.skip(reason='Requires large file')
 def test_read_is():
-    """ Test read_is."""
-    file_path = os.path.join(r'C:\Users\Victor Ferat\Desktop\MNI152.NlinAsym09c.257.5000.2019", "MNI152.NlinAsym09c.257.5000.2019.Loreta.is')
+    """Test read_is."""
+    file_path = os.path.join('test')
     inverse_solution = read_is(file_path)
     if not inverse_solution['is_type'] == 'IS03':
         raise AssertionError()
 
 
 def test_read_ris():
-    """ Test read_ris."""
+    """Test read_ris."""
     file_path = os.path.join(data_path, 'sample_test_ris.ris')
     read_ris(file_path)
 
 
 def test_write_ris():
-    """ Test write_is."""
+    """Test write_is."""
     file_path = os.path.join(data_path, 'sample_test_write_ris.ris')
-    sources_tc = np.random.rand(5000, 3, 2048)
+    sources_tc = np.random.rand(5000, 3, 2048).astype('float32')
     sfreq = 512
     subject = 'test_subject'
     source_estimate = SourceEstimate(sources_tc, sfreq, subject=subject)
     source_estimate.save(file_path)
     read_source_estimate = read_ris(file_path)
-    if not (read_source_estimate.sources_tc == sources_tc.astype('float32')).all():
+    if not read_source_estimate.sources_tc == sources_tc.all():
         raise AssertionError()
     if not read_source_estimate.sfreq == sfreq:
         raise AssertionError()
@@ -75,6 +74,7 @@ def test_write_ris():
 
 
 def test_compute_tc():
+    """Test SourceEstimate.compute_tc."""
     source_estimate = generate_source_estimate(5000, 2048, 512)
     tc_mean = source_estimate.compute_tc(method='mean')
     tc_med = source_estimate.compute_tc(method='median')
@@ -89,6 +89,7 @@ def test_compute_tc():
 
 
 def test_compute_rois_tc():
+    """Test SourceEstimate.compute_rois_tc."""
     source_space = generate_source_space(5000)
     source_estimate = generate_source_estimate(5000, 2048, 512)
     source_estimate.source_space = source_space
@@ -100,7 +101,9 @@ def test_compute_rois_tc():
     if not rois_estimates.sfreq == 512:
         raise AssertionError()
 
+
 def test_per_roi():
+    """Test SourceEstimate.per_roi"""
     source_space = generate_source_space(5000)
     source_estimate = generate_source_estimate(5000, 2048, 512)
     source_estimate.source_space = source_space
