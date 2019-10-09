@@ -1,6 +1,6 @@
 import struct
 import numpy as np
-from .source_space import SourceSpace, write_spi
+from .source_space import write_spi
 
 
 def _check_sources_tc(sources_tc):

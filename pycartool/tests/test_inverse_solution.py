@@ -8,7 +8,7 @@ import pytest
 import numpy as np
 
 from ..io.inverse_solution import read_is
-from ..source_estimate import read_ris, write_ris, SourceEstimate
+from ..source_estimate import read_ris, SourceEstimate
 
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -27,7 +27,7 @@ def test_read_is():
 def test_read_ris():
     """ Test read_ris."""
     file_path = os.path.join(data_path, 'sample_test_ris.ris')
-    source_estimate = read_ris(file_path)
+    read_ris(file_path)
 
 
 def test_write_ris():
