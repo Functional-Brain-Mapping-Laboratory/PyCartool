@@ -1,62 +1,34 @@
-pycartool.io package
-====================
+pycartool.io
+============
 
-Submodules
-----------
-
-pycartool.io.montage module
----------------------------
+pycartool.io.montage
+--------------------
 
 .. automodule:: pycartool.io.montage
    :members:
    :undoc-members:
    :show-inheritance:
 
-pycartool.io.sef module
------------------------
+pycartool.io.sef
+----------------
 
 .. automodule:: pycartool.io.sef
    :members:
    :undoc-members:
    :show-inheritance:
 
-pycartool.io.roi module
------------------------
-
-.. automodule:: pycartool.io.roi
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-
-pycartool.io.source_space module
---------------------------------
-
-.. automodule:: pycartool.io.source_space
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-pycartool.io.inverse_solution module
-------------------------------------
+pycartool.io.inverse_solution
+-----------------------------
 
 .. automodule:: pycartool.io.inverse_solution
    :members:
    :undoc-members:
    :show-inheritance:
 
-pycartool.io.leadfield module
------------------------------
+pycartool.io.leadfield
+----------------------
 
 .. automodule:: pycartool.io.leadfield
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: pycartool.io
    :members:
    :undoc-members:
    :show-inheritance:

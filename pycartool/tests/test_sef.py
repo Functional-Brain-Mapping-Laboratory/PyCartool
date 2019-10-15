@@ -11,6 +11,7 @@ data_path = os.path.join(dir_path, "data")
 
 datasef = os.path.join(data_path, "sample-sef.sef")
 
+
 def test_read_sef():
     read_sef(datasef)
     return()

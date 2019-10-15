@@ -9,3 +9,6 @@ Welcome to PyCartool's documentation!
    :maxdepth: 2
 
    pycartool.io
+   pycartool.source_space
+   pycartool.source_estimate
+   pycartool.regions_of_interest
