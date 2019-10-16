@@ -197,7 +197,7 @@ class SourceEstimate(object):
         write_ris(self, filename)
         if export_spi is True:
             if self.source_space is not None:
-                write_spi(filename[:-3] + '.spi', self)
+                write_spi(filename[:-3] + '.spi', self.source_space)
             else:
                 raise ValueError('Cannot save source space to file, source '
                                  'space is not defined')
@@ -268,8 +268,8 @@ class SourceEstimate(object):
             U, s, V = np.linalg.svd(sources_tc_flat, full_matrices=False)
             scale = np.linalg.norm(s) / np.sqrt(len(sources_tc_flat))
             tc = np.array([scale * V[0]])
-            pos = self.source_space.new_coordinates
-            pos_flat = self.sources_tc.reshape(-1)
+            pos = self.source_space.coordinates
+            pos_flat = pos.reshape(-1)
             v = np.multiply(U[:, 0], pos_flat).reshape(-1, 3).mean(axis=0)
             v = v/np.linalg.norm(v)
             print(v)

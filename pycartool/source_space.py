@@ -69,8 +69,8 @@ def write_spi(filename, SourceSpace):
     SourceSpace : pycartool.source_space.SourceSpace
         The SourceSpace to save.
     """
-    names = SourceSpace.get_names()
-    x, y, z = SourceSpace.get_coordinates().T
+    names = SourceSpace.names
+    x, y, z = SourceSpace.coordinates.T
     with open(filename, 'w', newline='') as f:
         writer = csv.writer(f, delimiter='\t')
         for s in enumerate(zip(x, y, z, names)):
