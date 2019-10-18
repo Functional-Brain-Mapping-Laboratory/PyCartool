@@ -11,7 +11,7 @@ def read_is(filename):
 
     Parameters
     ----------
-    filename : str
+    filename : str | file-like
         the is file to read.
 
     Returns
@@ -81,7 +81,11 @@ def read_is(filename):
             print(f'Regularizations names: {regularizations_names}')
 
             regularisation_solutions = []
-            buf = f.read(numregularizations * n_dim * numsolutionpoints * n_channels * 4)
+            buf = f.read(numregularizations
+                         * n_dim
+                         * numsolutionpoints
+                         * n_channels
+                         * 4)
             data = np.frombuffer(buf, dtype=np.float32)
             data = data.reshape(numregularizations, n_dim,
                                 numsolutionpoints, n_channels)

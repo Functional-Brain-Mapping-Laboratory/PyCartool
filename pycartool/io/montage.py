@@ -13,7 +13,7 @@ def read_xyz(filename, kind=''):
 
     Parameters
     ----------
-    filename : str
+    filename : str | file-like
         The filename of the xyz file.
 
     Returns

@@ -10,8 +10,9 @@ def read_roi(filename, source_space=None):
 
     Parameters
     ----------
-    filename : str
-        The roi file to read
+    filename : str | file-like
+        The Regions Of Interest (.roi) file to read.
+
     source_space : pycartool.source_space.SourceSpace
         The SourceSpace corresponding to the regions of interest.
 
@@ -82,8 +83,9 @@ class RegionsOfInterest(object):
         The sources indices belonging to each region of interest.
     source_space : pycartool.source_space.SourceSpace
         The source space associated to the regions of interest.
-    filename : str
-        The .roi file from with the data has beem extracted.
+    filename : str | file-like
+        The Regions Of Interest file (.roi) from which
+        the data has been extracted.
 
     Attributes
     ----------
@@ -93,8 +95,9 @@ class RegionsOfInterest(object):
         The sources indices belonging to each region of interest.
     source_space : pycartool.source_space.SourceSpace
         The source space associated to the regions of interest.
-    filename : str
-        The .roi file from with the data has beem extracted.
+    filename : str | file-like
+        The Regions Of Interest file (.roi) from which
+        the data has been extracted.
 
     """
     def __init__(self, names, groups_of_indexes,

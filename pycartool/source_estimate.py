@@ -29,11 +29,11 @@ def read_ris(filename, source_space=None, subject=None):
 
     Parameters
     ----------
-    filename : str
+    filename : str | file-like
         the ris file to read.
     source_space : pycartool.source_space.SourceSpace
         The SourceSpace corresponding to the source estimate.
-    subject : str
+    subject : str | file-like
         The subject used to create the source estimate.
     Returns
     -------
@@ -80,7 +80,7 @@ def write_ris(source_estimate, filename):
 
     Parameters
     ----------
-    filename : str
+    filename : str | file-like
         filename of the exported inverse solution computation.
     source_estimate : pycartool.source_estimate.source_estimate
         The SourceEstimate to save as a ris file.
@@ -142,7 +142,7 @@ class SourceEstimate(object):
         The SourceSpace corresponding to the source estimate.
     subject : str
         The subject used to create the source estimate.
-    filename : str
+    filename : str | file-like
         filename from wich the source estimate was imported.
 
     """
@@ -189,7 +189,7 @@ class SourceEstimate(object):
 
         Parameters
         ----------
-        filename : str
+        filename : str | file-like
             The ris file to write.
         export_spi : bool
             If True, also export the corresponding source space as ris file.

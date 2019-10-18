@@ -37,7 +37,7 @@ def read_spi(filename, subject=None):
 
     Parameters
     ----------
-    filename : str
+    filename : str | file-like
         The spi file to read.
     subject :
         The subject used to create the source space.
@@ -64,7 +64,7 @@ def write_spi(filename, SourceSpace):
 
     Parameters
     ----------
-    filename : str
+    filename : str | file-like
         The spi file to write.
     SourceSpace : pycartool.source_space.SourceSpace
         The SourceSpace to save.
@@ -88,7 +88,7 @@ class SourceSpace(object):
         The solutions point names coordinates.
     subject : str
         Subject from who the source space was created.
-    filename : str
+    filename : str | file-like
         If loaded from a file, the corresponding filename.
 
     Attributes
@@ -101,7 +101,7 @@ class SourceSpace(object):
         The solutions point names coordinates.
     subject : str
         Subject from who the source space was created.
-    filename : str
+    filename : str | file-like
         If loaded from a file, the corresponding filename.
 
     """
@@ -142,7 +142,7 @@ class SourceSpace(object):
 
         Parameters
         ----------
-        filename : str
+        filename : str | file-like
             The spi file to write.
 
         """

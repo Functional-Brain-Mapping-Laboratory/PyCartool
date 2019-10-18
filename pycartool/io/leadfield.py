@@ -11,7 +11,7 @@ def read_lf(filename):
 
     Parameters
     ----------
-    filename : str
+    filename : str | file-like
         The lf file to read.
 
     Returns
