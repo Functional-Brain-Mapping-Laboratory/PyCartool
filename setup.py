@@ -25,7 +25,7 @@ setuptools.setup(
 
      long_description_content_type="text/markdown",
 
-     url="https://github.com/vferat/PyCartool",
+     url="https://github.com/Functional-Brain-Mapping-Laboratory/PyCartool",
 
      license="BSD-3-Clause",
 
