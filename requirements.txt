@@ -1,4 +1,5 @@
 sphinx_bootstrap_theme
+nbsphinx
 alabaster==0.7.12
 atomicwrites==1.3.0
 attrs==19.1.0

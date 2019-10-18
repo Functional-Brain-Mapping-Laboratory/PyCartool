@@ -272,7 +272,6 @@ class SourceEstimate(object):
             pos_flat = pos.reshape(-1)
             v = np.multiply(U[:, 0], pos_flat).reshape(-1, 3).mean(axis=0)
             v = v/np.linalg.norm(v)
-            print(v)
         return(tc)
 
     def compute_rois_tc(self, region_of_interest, method='svd'):
