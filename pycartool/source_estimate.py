@@ -127,7 +127,7 @@ class SourceEstimate(object):
     subject : str
         The subject used to create the source estimate.
     filename : str
-        filename from wich the source estimate was imported.
+        filename from which the source estimate was imported.
 
     Attributes
     ----------
@@ -142,8 +142,8 @@ class SourceEstimate(object):
         The SourceSpace corresponding to the source estimate.
     subject : str
         The subject used to create the source estimate.
-    filename : str | file-like
-        filename from wich the source estimate was imported.
+    filename : str
+        filename from which the source estimate was imported.
 
     """
 
