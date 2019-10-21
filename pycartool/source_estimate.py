@@ -117,9 +117,9 @@ class SourceEstimate(object):
 
     Parameters
     ----------
-    sources_tc : array, shape (n_solutionpoints, n_dim, n_timeframes)
+    sources_tc : numpy.ndarray, shape (n_solutionpoints, n_dim, n_timeframes)
         The sources time courses. Can be either scalar (ndim=1) or
-         vectorial (ndim=3).
+        vectorial (ndim=3).
     sfreq : float
         The sampling frequency.
     source_space : pycartool.source_space.SourceSpace
@@ -135,9 +135,9 @@ class SourceEstimate(object):
         True if estimate is scalar, False is estimate is vectorial.
     n_sources : int
         Number of sources.
-    sources_tc : array, shape (n_solutionpoints, n_dim, n_timeframes)
+    sources_tc : numpy.ndarray, shape (n_solutionpoints, n_dim, n_timeframes)
         The sources time courses. Can be either scalar (ndim=1) or
-         vectorial (ndim=3).
+        vectorial (ndim=3).
     source_space : pycartool.source_space.SourceSpace
         The SourceSpace corresponding to the source estimate.
     subject : str
@@ -207,7 +207,7 @@ class SourceEstimate(object):
 
         Parameters
         ----------
-        region_of_interest : pycartool.regions_of_interest.RegionOfInterest
+        region_of_interest : pycartool.regions_of_interest.RegionsOfInterest
             The region of interest used to split the source estimate.
 
         Returns
@@ -254,7 +254,7 @@ class SourceEstimate(object):
         -------
         tc : numpy.ndarray, shape(n_dim, n_times)
             The global source estimate time course. Can be either Vectorial or
-             Scalar depending of the source estimate and the method.
+            Scalar depending of the source estimate and the method.
 
         """
         _check_method(method)
@@ -279,7 +279,7 @@ class SourceEstimate(object):
 
         Parameters
         ----------
-        region_of_interest : pycartool.regions_of_interest.RegionOfInterest
+        region_of_interest : pycartool.regions_of_interest.RegionsOfInterest
             The region of interest used to split the source estimate.
         method : str
             the method use to compute the time course. Can be either 'mean',

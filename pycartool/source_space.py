@@ -97,7 +97,7 @@ class SourceSpace(object):
         Number of sources.
     names : list of str, length (n_sources)
         The solutions point names.
-    coordinates : ndarray, shape (n_sources, 3)
+    coordinates : numpy.ndarray, shape (n_sources, 3)
         The solutions point names coordinates.
     subject : str
         Subject from who the source space was created.
