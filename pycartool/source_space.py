@@ -39,7 +39,7 @@ def read_spi(filename, subject=None):
     ----------
     filename : str | file-like
         The spi file to read.
-    subject :
+    subject : str
         The subject used to create the source space.
     Returns
     -------
@@ -84,7 +84,7 @@ class SourceSpace(object):
     ----------
     names : list of str, length (n_sources)
         The solutions point names.
-    coordinates : ndarray, shape (n_sources, 3)
+    coordinates : numpy.ndarray, shape (n_sources, 3)
         The solutions point names coordinates.
     subject : str
         Subject from who the source space was created.
@@ -149,6 +149,19 @@ class SourceSpace(object):
         write_spi(filename, self)
 
     def get_center_of_mass(self, method='mean'):
+        """Compute the center of mass of the Source Space.
+
+        Parameters
+        ----------
+        method : str
+            The method to use. Can be 'mean', or 'median'.
+
+        Returns
+        -------
+        center_of_mass : numpy.ndarray, shape(3)
+            The x,y,z coordinates of the center of mass.
+
+        """
         if method == 'mean':
             center_of_mass = np.mean(self.coordinates, axis=0)
         elif method == 'median':

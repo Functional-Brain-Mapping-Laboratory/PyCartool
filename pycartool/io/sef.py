@@ -83,7 +83,7 @@ def write_sef(filename, raw):
     ----------
     filename : str | file-like
         Filename of the exported dataset.
-    raw : instance of mne.io.Raw
+    raw : instance of mne.io.RawArray
         The raw data to export.
     """
     n_channels = len(raw.info['ch_names'])

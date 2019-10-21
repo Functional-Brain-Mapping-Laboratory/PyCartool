@@ -18,7 +18,7 @@ def read_roi(filename, source_space=None):
 
     Returns
     -------
-    regions_of_interest : pycartool.regions_of_interest.RegionOfInterest
+    regions_of_interest : pycartool.regions_of_interest.RegionsOfInterest
         The regions of interest.
 
     Note

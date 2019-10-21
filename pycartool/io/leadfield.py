@@ -16,7 +16,7 @@ def read_lf(filename):
 
     Returns
     -------
-    leadfield_matrix : ndarray, shape (n_channels, n_sources, 3)
+    leadfield_matrix : numpy.ndarray, shape (n_channels, n_sources, 3)
         the leadfield matrix.
 
     """

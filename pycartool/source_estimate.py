@@ -37,7 +37,7 @@ def read_ris(filename, source_space=None, subject=None):
         The subject used to create the source estimate.
     Returns
     -------
-    source_estimate : pycartool.source_estimate.source_estimate
+    source_estimate : pycartool.source_estimate.SourceEstimate
         The SourceEstimate extracted from ris file.
     """
     with open(filename, 'rb') as f:
@@ -82,7 +82,7 @@ def write_ris(source_estimate, filename):
     ----------
     filename : str | file-like
         filename of the exported inverse solution computation.
-    source_estimate : pycartool.source_estimate.source_estimate
+    source_estimate : pycartool.source_estimate.SourceEstimate
         The SourceEstimate to save as a ris file.
     """
     data = source_estimate.sources_tc.T
@@ -117,7 +117,7 @@ class SourceEstimate(object):
 
     Parameters
     ----------
-    sources_tc : numpy.ndarray, shape (n_solutionpoints, n_dim, n_timeframes)
+    sources_tc : array, shape (n_solutionpoints, n_dim, n_timeframes)
         The sources time courses. Can be either scalar (ndim=1) or
          vectorial (ndim=3).
     sfreq : float
@@ -135,7 +135,7 @@ class SourceEstimate(object):
         True if estimate is scalar, False is estimate is vectorial.
     n_sources : int
         Number of sources.
-    sources_tc : numpy.ndarray, shape (n_solutionpoints, n_dim, n_timeframes)
+    sources_tc : array, shape (n_solutionpoints, n_dim, n_timeframes)
         The sources time courses. Can be either scalar (ndim=1) or
          vectorial (ndim=3).
     source_space : pycartool.source_space.SourceSpace
@@ -207,7 +207,7 @@ class SourceEstimate(object):
 
         Parameters
         ----------
-        region_of_interest : pycartool.region_of_interest.RegionOfInterest
+        region_of_interest : pycartool.regions_of_interest.RegionOfInterest
             The region of interest used to split the source estimate.
 
         Returns
@@ -252,7 +252,7 @@ class SourceEstimate(object):
 
         Returns
         -------
-        tc : np.ndarray, shape(n_dim, n_times)
+        tc : numpy.ndarray, shape(n_dim, n_times)
             The global source estimate time course. Can be either Vectorial or
              Scalar depending of the source estimate and the method.
 
@@ -279,7 +279,7 @@ class SourceEstimate(object):
 
         Parameters
         ----------
-        region_of_interest : pycartool.region_of_interest.RegionOfInterest
+        region_of_interest : pycartool.regions_of_interest.RegionOfInterest
             The region of interest used to split the source estimate.
         method : str
             the method use to compute the time course. Can be either 'mean',
@@ -287,7 +287,7 @@ class SourceEstimate(object):
 
         Returns
         -------
-        Roi_source_estimate : pycartool.source_space.SourceEstimate
+        Roi_source_estimate : pycartool.source_estimate.SourceEstimate
             A source estimate instance where each source correspond to a region
             of interest.
 
