@@ -82,7 +82,7 @@ class SourceSpace(object):
 
     Parameters
     ----------
-    names : list of str, lenght (n_sources)
+    names : list of str, length (n_sources)
         The solutions point names.
     coordinates : ndarray, shape (n_sources, 3)
         The solutions point names coordinates.
@@ -95,7 +95,7 @@ class SourceSpace(object):
     ----------
     n_sources : int
         Number of sources.
-    names : list of str, lenght (n_sources)
+    names : list of str, length (n_sources)
         The solutions point names.
     coordinates : ndarray, shape (n_sources, 3)
         The solutions point names coordinates.
@@ -109,7 +109,7 @@ class SourceSpace(object):
         _checkcoordinates(coordinates)
         _checknames(names)
         if not len(names) == coordinates.shape[0]:
-            raise ValueError(f'coordinates and names dimesions must match'
+            raise ValueError(f'coordinates and names dimensions must match'
                              f' but found {len(names)} names and '
                              f'{coordinates.shape[0]} solution points'
                              f' coordinates')
