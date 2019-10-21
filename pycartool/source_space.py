@@ -82,7 +82,7 @@ class SourceSpace(object):
 
     Parameters
     ----------
-    names : list of str, length (n_sources)
+    names : :obj:`list` of :obj:`str`, length (n_sources)
         The solutions point names.
     coordinates : numpy.ndarray, shape (n_sources, 3)
         The solutions point names coordinates.
@@ -95,7 +95,7 @@ class SourceSpace(object):
     ----------
     n_sources : int
         Number of sources.
-    names : list of str, length (n_sources)
+    names : :obj:`list` of :obj:`str`, length (n_sources)
         The solutions point names.
     coordinates : numpy.ndarray, shape (n_sources, 3)
         The solutions point names coordinates.

@@ -189,7 +189,7 @@ class SourceEstimate(object):
 
         Parameters
         ----------
-        filename : str | file-like
+        filename : str or file-like
             The ris file to write.
         export_spi : bool
             If True, also export the corresponding source space as ris file.
@@ -212,7 +212,7 @@ class SourceEstimate(object):
 
         Returns
         -------
-        rois_source_estimate : list of pycartool.source_estimate.SourceEstimate
+        rois_source_estimate : :obj:`list` :obj:`pycartool.source_estimate.SourceEstimate`
             A list of Source estimate instance restricted to a Region of
             interest
 

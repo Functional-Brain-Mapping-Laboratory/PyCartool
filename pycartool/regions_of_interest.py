@@ -77,9 +77,9 @@ class RegionsOfInterest(object):
 
     Parameters
     ----------
-    names : list of str
+    names : :obj:`list` of :obj:`str`
         The regions of interest names.
-    groups_of_indexes : list of list (of int)
+    groups_of_indexes : :obj:`list` of :obj:`list` of :obj:`str`
         The sources indices belonging to each region of interest.
     source_space : pycartool.source_space.SourceSpace
         The source space associated to the regions of interest.
@@ -89,9 +89,9 @@ class RegionsOfInterest(object):
 
     Attributes
     ----------
-    names : list of str
+    names : :obj:`list` of :obj:`str`
         The regions of interest names.
-    groups_of_indexes : list of list (of int)
+    groups_of_indexes : :obj:`list` of :obj:`list` of :obj:`str`
         The sources indices belonging to each region of interest.
     source_space : pycartool.source_space.SourceSpace
         The source space associated to the regions of interest.
