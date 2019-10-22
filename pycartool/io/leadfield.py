@@ -11,8 +11,8 @@ def read_lf(filename):
 
     Parameters
     ----------
-    filename : str | file-like
-        The lf file to read.
+    filename : str or file-like
+        The leadfield file (.lf) to read.
 
     Returns
     -------

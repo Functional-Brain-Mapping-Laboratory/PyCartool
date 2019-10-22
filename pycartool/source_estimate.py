@@ -29,11 +29,11 @@ def read_ris(filename, source_space=None, subject=None):
 
     Parameters
     ----------
-    filename : str | file-like
+    filename : str or file-like
         the ris file to read.
     source_space : pycartool.source_space.SourceSpace
         The SourceSpace corresponding to the source estimate.
-    subject : str | file-like
+    subject : str or file-like
         The subject used to create the source estimate.
     Returns
     -------
@@ -80,7 +80,7 @@ def write_ris(source_estimate, filename):
 
     Parameters
     ----------
-    filename : str | file-like
+    filename : str or file-like
         filename of the exported inverse solution computation.
     source_estimate : pycartool.source_estimate.SourceEstimate
         The SourceEstimate to save as a ris file.
@@ -182,7 +182,7 @@ class SourceEstimate(object):
             s += f', subject : {self.subject}'
         if self.filename is not None:
             s += f', filename : {self.filename}'
-        return(f'<SourceEstimate | {s}>')
+        return(f'<SourceEstimate or {s}>')
 
     def save(self, filename, export_spi=False):
         """Write SourceEstimate to Cartool ris file.
@@ -212,7 +212,7 @@ class SourceEstimate(object):
 
         Returns
         -------
-        rois_source_estimate : :obj:`list` :obj:`pycartool.source_estimate.SourceEstimate`
+        rois_source_estimate : :obj:`list` of :obj:`pycartool.source_estimate.SourceEstimate`
             A list of Source estimate instance restricted to a Region of
             interest
 

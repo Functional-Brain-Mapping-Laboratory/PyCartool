@@ -11,13 +11,12 @@ def read_is(filename):
 
     Parameters
     ----------
-    filename : str | file-like
-        the is file to read.
+    filename : str or file-like
+        the Inerse solution file (.is) to read.
 
     Returns
     -------
-    inverse_solution : numpy.ndarray, shape (n_regularizations, n_dim,
-        n_solutionpoints, n_channels)
+    inverse_solution : numpy.ndarray, shape (n_regularizations, n_dim, n_solutionpoints, n_channels)
         the inverse solution matrices. n_dim=1 if solutions are scalar or
         n_dim=3 for vectorial solutions.
 

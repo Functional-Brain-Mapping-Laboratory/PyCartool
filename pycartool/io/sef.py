@@ -19,8 +19,8 @@ def read_sef(filename):
 
     Parameters
     ----------
-    filename : str | file-like
-        The path of the sef file.
+    filename : str or file-like
+        The Simple EEG (.sef) file to read.
 
     Returns
     -------
@@ -81,7 +81,7 @@ def write_sef(filename, raw):
 
     Parameters
     ----------
-    filename : str | file-like
+    filename : str or file-like
         Filename of the exported dataset.
     raw : mne.io.RawArray
         The raw data to export.

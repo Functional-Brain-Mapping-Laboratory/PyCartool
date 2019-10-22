@@ -4,7 +4,7 @@
 #
 # License: BSD (3-clause)
 
-from mne.channels import Montage
+from mne.channels import make_dig_montage
 import numpy as np
 
 
@@ -13,12 +13,12 @@ def read_xyz(filename, kind=''):
 
     Parameters
     ----------
-    filename : str | file-like
-        The filename of the xyz file.
+    filename : str or file-like
+        The Electrodes coordinates (.xyz) file to read.
 
     Returns
     -------
-    montage : mne.channels.montage.Montage
+    montage : mne.channels.DigMontage
         Montage for EEG electrode locations.
     """
 
@@ -27,6 +27,8 @@ def read_xyz(filename, kind=''):
     names = np.loadtxt(filename, skiprows=1, usecols=3, max_rows=n,
                        dtype=np.dtype(str))
     names = names.tolist()
-    montage = Montage(coord, names, kind,
-                      selection=[i for i in range(n)])
+    ch_pos = dict()
+    for i, name in enumerate(names):
+        ch_pos[name] = coord[i]
+    montage = make_dig_montage(ch_pos)
     return(montage)
