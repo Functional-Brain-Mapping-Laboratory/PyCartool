@@ -6,9 +6,10 @@
 Welcome to PyCartool's documentation!
 =====================================
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    pycartool.io
    pycartool.source_space
    pycartool.source_estimate
    pycartool.regions_of_interest
+   pycartool.tutorials

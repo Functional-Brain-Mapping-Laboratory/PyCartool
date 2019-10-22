@@ -37,9 +37,9 @@ def read_spi(filename, subject=None):
 
     Parameters
     ----------
-    filename : str
+    filename : str or file-like
         The spi file to read.
-    subject :
+    subject : str
         The subject used to create the source space.
     Returns
     -------
@@ -64,13 +64,13 @@ def write_spi(filename, SourceSpace):
 
     Parameters
     ----------
-    filename : str
+    filename : str or file-like
         The spi file to write.
     SourceSpace : pycartool.source_space.SourceSpace
         The SourceSpace to save.
     """
-    names = SourceSpace.get_names()
-    x, y, z = SourceSpace.get_coordinates().T
+    names = SourceSpace.names
+    x, y, z = SourceSpace.coordinates.T
     with open(filename, 'w', newline='') as f:
         writer = csv.writer(f, delimiter='\t')
         for s in enumerate(zip(x, y, z, names)):
@@ -82,26 +82,26 @@ class SourceSpace(object):
 
     Parameters
     ----------
-    names : list of str, length (n_sources)
+    names : :obj:`list` of :obj:`str`, length (n_sources)
         The solutions point names.
-    coordinates : ndarray, shape (n_sources, 3)
+    coordinates : numpy.ndarray, shape (n_sources, 3)
         The solutions point names coordinates.
     subject : str
         Subject from who the source space was created.
-    filename : str
+    filename : str or file-like
         If loaded from a file, the corresponding filename.
 
     Attributes
     ----------
     n_sources : int
         Number of sources.
-    names : list of str, length (n_sources)
+    names : :obj:`list` of :obj:`str`, length (n_sources)
         The solutions point names.
-    coordinates : ndarray, shape (n_sources, 3)
+    coordinates : numpy.ndarray, shape (n_sources, 3)
         The solutions point names coordinates.
     subject : str
         Subject from who the source space was created.
-    filename : str
+    filename : str or file-like
         If loaded from a file, the corresponding filename.
 
     """
@@ -127,7 +127,7 @@ class SourceSpace(object):
             s += f', subject : {self.subject}'
         if self.filename is not None:
             s += f', filename : {self.filename}'
-        return(f'<SourceSpace | {s}>')
+        return(f'<SourceSpace or {s}>')
 
     def get_coordinates(self):
         """Return a copy of sources coordinates."""
@@ -142,13 +142,26 @@ class SourceSpace(object):
 
         Parameters
         ----------
-        filename : str
+        filename : str or file-like
             The spi file to write.
 
         """
         write_spi(filename, self)
 
     def get_center_of_mass(self, method='mean'):
+        """Compute the center of mass of the Source Space.
+
+        Parameters
+        ----------
+        method : str
+            The method to use. Can be 'mean', or 'median'.
+
+        Returns
+        -------
+        center_of_mass : numpy.ndarray, shape(3)
+            The x,y,z coordinates of the center of mass.
+
+        """
         if method == 'mean':
             center_of_mass = np.mean(self.coordinates, axis=0)
         elif method == 'median':

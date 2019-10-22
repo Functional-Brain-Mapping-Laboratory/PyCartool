@@ -36,8 +36,16 @@ extensions = [
    'sphinx.ext.doctest',
    'sphinx.ext.coverage',
    'sphinx.ext.mathjax',
-   'sphinx.ext.viewcode']
+   'sphinx.ext.viewcode',
+   'sphinx.ext.intersphinx',
+   'nbsphinx']
 
+# intersphinx_mapping
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/3', None),
+    'numpy': ('https://numpy.org/devdocs', None),
+    'mne': ('https://mne.tools/stable/', None)
+}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
