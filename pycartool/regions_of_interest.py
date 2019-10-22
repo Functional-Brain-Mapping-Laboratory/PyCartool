@@ -10,14 +10,15 @@ def read_roi(filename, source_space=None):
 
     Parameters
     ----------
-    filename : str
-        The roi file to read
+    filename : str or file-like
+        The Regions Of Interest (.roi) file to read.
+
     source_space : pycartool.source_space.SourceSpace
         The SourceSpace corresponding to the regions of interest.
 
     Returns
     -------
-    regions_of_interest : pycartool.regions_of_interest.RegionOfInterest
+    regions_of_interest : pycartool.regions_of_interest.RegionsOfInterest
         The regions of interest.
 
     Note
@@ -76,25 +77,27 @@ class RegionsOfInterest(object):
 
     Parameters
     ----------
-    names : list of str
+    names : :obj:`list` of :obj:`str`
         The regions of interest names.
-    groups_of_indexes : list of list (of int)
+    groups_of_indexes : :obj:`list` of :obj:`list` of :obj:`int`
         The sources indices belonging to each region of interest.
     source_space : pycartool.source_space.SourceSpace
         The source space associated to the regions of interest.
-    filename : str
-        The .roi file from with the data has beem extracted.
+    filename : str or file-like
+        The Regions Of Interest file (.roi) from which
+        the data has been extracted.
 
     Attributes
     ----------
-    names : list of str
+    names : :obj:`list` of :obj:`str`
         The regions of interest names.
-    groups_of_indexes : list of list (of int)
+    groups_of_indexes : :obj:`list` of :obj:`list` of :obj:`int`
         The sources indices belonging to each region of interest.
     source_space : pycartool.source_space.SourceSpace
         The source space associated to the regions of interest.
-    filename : str
-        The .roi file from with the data has beem extracted.
+    filename : str or file-like
+        The Regions Of Interest file (.roi) from which
+        the data has been extracted.
 
     """
     def __init__(self, names, groups_of_indexes,
@@ -120,4 +123,4 @@ class RegionsOfInterest(object):
         s = f'{len(self.names)} Rois'
         if self.filename is not None:
             s += f', filename : {self.filename}'
-        return(f'<RegionsOfInterest | {s}>')
+        return(f'<RegionsOfInterest or {s}>')

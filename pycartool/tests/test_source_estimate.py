@@ -75,7 +75,9 @@ def test_write_ris():
 
 def test_compute_tc():
     """Test SourceEstimate.compute_tc."""
+    source_space = generate_source_space(5000)
     source_estimate = generate_source_estimate(5000, 2048, 512)
+    source_estimate.source_space = source_space
     tc_mean = source_estimate.compute_tc(method='mean')
     tc_med = source_estimate.compute_tc(method='median')
     tc_svd = source_estimate.compute_tc(method='svd')

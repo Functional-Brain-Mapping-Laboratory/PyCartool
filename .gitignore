@@ -61,3 +61,5 @@ target/
 test.sef
 pycartool/tests/data/sample_test_write_spi.spi
 pycartool/tests/data/sample_test_write_ris.ris
+docs/source/tutorials/.ipynb_checkpoints/svd-checkpoint.ipynb
+docs/source/tutorials/svd/.ipynb_checkpoints/svd-checkpoint.ipynb

@@ -29,15 +29,15 @@ def read_ris(filename, source_space=None, subject=None):
 
     Parameters
     ----------
-    filename : str
+    filename : str or file-like
         the ris file to read.
     source_space : pycartool.source_space.SourceSpace
         The SourceSpace corresponding to the source estimate.
-    subject : str
+    subject : str or file-like
         The subject used to create the source estimate.
     Returns
     -------
-    source_estimate : pycartool.source_estimate.source_estimate
+    source_estimate : pycartool.source_estimate.SourceEstimate
         The SourceEstimate extracted from ris file.
     """
     with open(filename, 'rb') as f:
@@ -80,9 +80,9 @@ def write_ris(source_estimate, filename):
 
     Parameters
     ----------
-    filename : str
+    filename : str or file-like
         filename of the exported inverse solution computation.
-    source_estimate : pycartool.source_estimate.source_estimate
+    source_estimate : pycartool.source_estimate.SourceEstimate
         The SourceEstimate to save as a ris file.
     """
     data = source_estimate.sources_tc.T
@@ -119,7 +119,7 @@ class SourceEstimate(object):
     ----------
     sources_tc : numpy.ndarray, shape (n_solutionpoints, n_dim, n_timeframes)
         The sources time courses. Can be either scalar (ndim=1) or
-         vectorial (ndim=3).
+        vectorial (ndim=3).
     sfreq : float
         The sampling frequency.
     source_space : pycartool.source_space.SourceSpace
@@ -137,7 +137,7 @@ class SourceEstimate(object):
         Number of sources.
     sources_tc : numpy.ndarray, shape (n_solutionpoints, n_dim, n_timeframes)
         The sources time courses. Can be either scalar (ndim=1) or
-         vectorial (ndim=3).
+        vectorial (ndim=3).
     source_space : pycartool.source_space.SourceSpace
         The SourceSpace corresponding to the source estimate.
     subject : str
@@ -182,14 +182,14 @@ class SourceEstimate(object):
             s += f', subject : {self.subject}'
         if self.filename is not None:
             s += f', filename : {self.filename}'
-        return(f'<SourceEstimate | {s}>')
+        return(f'<SourceEstimate or {s}>')
 
     def save(self, filename, export_spi=False):
         """Write SourceEstimate to Cartool ris file.
 
         Parameters
         ----------
-        filename : str
+        filename : str or file-like
             The ris file to write.
         export_spi : bool
             If True, also export the corresponding source space as ris file.
@@ -197,7 +197,7 @@ class SourceEstimate(object):
         write_ris(self, filename)
         if export_spi is True:
             if self.source_space is not None:
-                write_spi(filename[:-3] + '.spi', self)
+                write_spi(filename[:-3] + '.spi', self.source_space)
             else:
                 raise ValueError('Cannot save source space to file, source '
                                  'space is not defined')
@@ -207,12 +207,12 @@ class SourceEstimate(object):
 
         Parameters
         ----------
-        region_of_interest : pycartool.region_of_interest.RegionOfInterest
+        region_of_interest : pycartool.regions_of_interest.RegionsOfInterest
             The region of interest used to split the source estimate.
 
         Returns
         -------
-        rois_source_estimate : list of pycartool.source_estimate.SourceEstimate
+        rois_source_estimate : :obj:`list` of :obj:`pycartool.source_estimate.SourceEstimate`
             A list of Source estimate instance restricted to a Region of
             interest
 
@@ -252,9 +252,9 @@ class SourceEstimate(object):
 
         Returns
         -------
-        tc : np.ndarray, shape(n_dim, n_times)
+        tc : numpy.ndarray, shape(n_dim, n_times)
             The global source estimate time course. Can be either Vectorial or
-             Scalar depending of the source estimate and the method.
+            Scalar depending of the source estimate and the method.
 
         """
         _check_method(method)
@@ -268,6 +268,10 @@ class SourceEstimate(object):
             U, s, V = np.linalg.svd(sources_tc_flat, full_matrices=False)
             scale = np.linalg.norm(s) / np.sqrt(len(sources_tc_flat))
             tc = np.array([scale * V[0]])
+            pos = self.source_space.coordinates
+            pos_flat = pos.reshape(-1)
+            v = np.multiply(U[:, 0], pos_flat).reshape(-1, 3).mean(axis=0)
+            v = v/np.linalg.norm(v)
         return(tc)
 
     def compute_rois_tc(self, region_of_interest, method='svd'):
@@ -275,7 +279,7 @@ class SourceEstimate(object):
 
         Parameters
         ----------
-        region_of_interest : pycartool.region_of_interest.RegionOfInterest
+        region_of_interest : pycartool.regions_of_interest.RegionsOfInterest
             The region of interest used to split the source estimate.
         method : str
             the method use to compute the time course. Can be either 'mean',
@@ -283,7 +287,7 @@ class SourceEstimate(object):
 
         Returns
         -------
-        Roi_source_estimate : pycartool.source_space.SourceEstimate
+        Roi_source_estimate : pycartool.source_estimate.SourceEstimate
             A source estimate instance where each source correspond to a region
             of interest.
 

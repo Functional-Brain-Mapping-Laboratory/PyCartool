@@ -12,22 +12,22 @@ from mne.io import RawArray
 from mne import create_info
 
 
-def read_sef(path):
+def read_sef(filename):
     """
     Reads file with format .sef, and returns a mne.io.Raw object containing
     the data.
 
     Parameters
     ----------
-    path : str
-        The path of the sef file.
+    filename : str or file-like
+        The Simple EEG (.sef) file to read.
 
     Returns
     -------
     raw : mne.io.RawArray
         RawArray containing the EEG signals.
     """
-    f = open(path, 'rb')
+    f = open(filename, 'rb')
     #   Read fixed part of the headerà
     version = f.read(4).decode('utf-8')
     if version != 'SE01':
@@ -76,14 +76,14 @@ def read_sef(path):
     return (raw)
 
 
-def write_sef(path, raw):
+def write_sef(filename, raw):
     """Export a raw mne file to a sef file.
 
     Parameters
     ----------
-    path : str
+    filename : str or file-like
         Filename of the exported dataset.
-    raw : instance of mne.io.Raw
+    raw : mne.io.RawArray
         The raw data to export.
     """
     n_channels = len(raw.info['ch_names'])
@@ -93,7 +93,7 @@ def write_sef(path, raw):
     num_aux_electrodes = n_channels - len(mne.pick_types(info, meg=False,
                                                          eeg=True,
                                                          exclude=['']))
-    f = open(path, 'wb')
+    f = open(filename, 'wb')
     f.write('SE01'.encode('utf-8'))
     f.write(struct.pack('I', n_channels))
     f.write(struct.pack('I', num_aux_electrodes))
