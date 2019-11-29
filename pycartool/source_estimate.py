@@ -108,6 +108,7 @@ def write_ris(source_estimate, filename):
     f.write(struct.pack('I', n_timeframes))
     f.write(struct.pack('f', sfreq))
     f.write(isinversescalar.encode('utf-8'))
+    data = np.swapaxes(data, 1, 2)
     data = data.astype(np.float32)
     data.tofile(f)
     f.close()
