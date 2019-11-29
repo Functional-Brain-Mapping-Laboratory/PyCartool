@@ -87,8 +87,9 @@ def read_is(filename):
                          * n_channels
                          * 4)
             data = np.frombuffer(buf, dtype=np.float32)
-            data = data.reshape(numregularizations, n_dim,
-                                numsolutionpoints, n_channels)
+            data = data.reshape(numregularizations, numsolutionpoints,
+                                n_dim, n_channels)
+            data = np.swapaxes(data, 1, 2)
 
     regularisation_solutions = np.array(regularisation_solutions)
     inverse_solution = {'is_type': is_type,
