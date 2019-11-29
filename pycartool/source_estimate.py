@@ -67,7 +67,8 @@ def read_ris(filename, source_space=None, subject=None):
 
         buf = f.read(n_dim * n_solutionpoints * n_timeframes * 4)
         data = np.frombuffer(buf, dtype=np.float32)
-        data = data.reshape(n_timeframes, n_dim, n_solutionpoints)
+        data = data.reshape(n_timeframes, n_solutionpoints, n_dim)
+        data = np.swapaxes(data, 1, 2)
         source_estimate = SourceEstimate(data.T, s_freq,
                                          source_space=source_space,
                                          subject=subject,
@@ -107,6 +108,7 @@ def write_ris(source_estimate, filename):
     f.write(struct.pack('I', n_timeframes))
     f.write(struct.pack('f', sfreq))
     f.write(isinversescalar.encode('utf-8'))
+    data = np.swapaxes(data, 1, 2)
     data = data.astype(np.float32)
     data.tofile(f)
     f.close()

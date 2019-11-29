@@ -21,7 +21,7 @@ def read_xyz(filename):
     """
 
     n = int(open(filename).readline().lstrip().split(' ')[0])
-    coord = np.loadtxt(filename, skiprows=1, usecols=(1, 0, 2), max_rows=n)
+    coord = np.loadtxt(filename, skiprows=1, usecols=(0, 1, 2), max_rows=n)
     names = np.loadtxt(filename, skiprows=1, usecols=3, max_rows=n,
                        dtype=np.dtype(str))
     names = names.tolist()
