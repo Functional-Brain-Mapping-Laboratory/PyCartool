@@ -12,7 +12,7 @@ setuptools.setup(
 
      name='pycartool',
 
-     version='0.1.1',
+     version='0.1.1b',
 
      author="Victor Férat",
 
