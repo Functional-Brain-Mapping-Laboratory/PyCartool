@@ -58,17 +58,12 @@ def read_ris(filename, source_space=None, subject=None):
         s_freq = struct.unpack('f', f.read(4))[0]
         print(f'Samplimg frequency: {s_freq}')
         isinversescalar = struct.unpack('c', f.read(1))[0]
-        isinversescalar = isinversescalar.decode("utf-8")
-        if isinversescalar == '0':
+        if isinversescalar == b'0':
             n_dim = 1
             print(f'Result of Inverse Solution computation is Scalar')
-        elif isinversescalar == '1':
+        else:
             print(f'Result of Inverse Solution computation is Vectorial')
             n_dim = 3
-        else:
-            print(isinversescalar)
-            raise ValueError('isinversescalar must be either 0 for scalar, '
-                             'either 1 for vectorial')
 
         buf = f.read(n_dim * n_solutionpoints * n_timeframes * 4)
         data = np.frombuffer(buf, dtype=np.float32)
@@ -98,9 +93,9 @@ def write_ris(source_estimate, filename):
     if data.ndim != 3:
         raise ValueError('Input data must be a 3D array')
     if data.shape[1] == 1:
-        isinversescalar = '0'
+        isinversescalar = b'0'
     elif data.shape[1] == 3:
-        isinversescalar = '1'
+        isinversescalar = b'\x00'
     else:
         raise ValueError('Input data must have shape (_,1,_) (scalar)'
                          ' or (_,3,_) (vectorial)')
@@ -112,8 +107,11 @@ def write_ris(source_estimate, filename):
     f.write(struct.pack('I', n_solutionpoints))
     f.write(struct.pack('I', n_timeframes))
     f.write(struct.pack('f', sfreq))
-    f.write(isinversescalar.encode('utf-8'))
-    data = np.swapaxes(data, 0, 1)
+    f.write(struct.pack('c', isinversescalar))
+    if isinversescalar == b'\x00':
+        data = np.swapaxes(data, 1, 2)
+    else:
+        data = np.swapaxes(data, 0, 1)
     data = data.astype(np.float32)
     data.tofile(f)
     f.close()
