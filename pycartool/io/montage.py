@@ -27,6 +27,6 @@ def read_xyz(filename):
     names = names.tolist()
     ch_pos = dict()
     for i, name in enumerate(names):
-        ch_pos[name] = coord[i]
+        ch_pos[name] = coord[i] / 1000
     montage = make_dig_montage(ch_pos=ch_pos, coord_frame='head')
     return montage
