@@ -31,7 +31,7 @@ def read_sef(filename):
     #   Read fixed part of the headerà
     version = f.read(4).decode('utf-8')
     if version != 'SE01':
-        priint(f'Version : {version} not supported')
+        print(f'Version : {version} not supported')
         raise ValueError()
     n_channels,         = struct.unpack('I', f.read(4))
     num_aux_electrodes, = struct.unpack('I', f.read(4))
@@ -50,7 +50,7 @@ def read_sef(filename):
     for _ in range(n_channels):
         name = [char for char in f.read(8).split(b'\x00')
                 if char != b''][0]
-        ch_names.append(name.decode('utf-8'))
+        ch_names.append(name.decode('utf-8').strip())
     # Read data
     buffer = np.frombuffer(
         f.read(n_channels * num_time_frames * 8),
