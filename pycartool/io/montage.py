@@ -30,3 +30,26 @@ def read_xyz(filename):
         ch_pos[name] = coord[i]
     montage = make_dig_montage(ch_pos=ch_pos, coord_frame='head')
     return montage
+
+
+def write_xyz(filename, info):
+    """Export channels coordinates from raw.info to a xyz file.
+
+    Parameters
+    ----------
+    filename : str or file-like
+        Filename of the xyz file .
+    info : mne.Info
+        The info object use to extract the montage.
+    """
+
+    pos = np.array([e['loc'][:3] for e in info['chs']]).reshape(-1,3) * 1e3
+    names = info['ch_names']
+    n = len(names)
+    with open(filename, 'w') as f:
+        f.write(str(n) + '    ' + str(np.max(np.mean(pos,axis=1))) + '\n')
+        for e,elec in enumerate(names):
+            f.write("{0:<16}    {1:<16}    {2:<16}    {3:<25}\n".format(pos[e][0],
+                                                                        pos[e][1],
+                                                                        pos[e][2],
+                                                                        elec))
