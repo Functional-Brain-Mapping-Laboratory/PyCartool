@@ -10,6 +10,7 @@ import numpy as np
 import mne
 from mne.io import RawArray
 from mne import create_info
+from mne.utils import verbose, logger
 
 
 def read_sef(filename):
@@ -64,8 +65,7 @@ def read_sef(filename):
                                   hour, minute, second).timetuple()
         meas_date = (time.mktime(record_time), millisecond)
     except Exception as e:
-        print('Cannot read recording date from file...')
-        print(e)
+        logger.info('Cannot read recording date from file')
         meas_date = None
     ch_types = ['eeg' for i in range(n_channels)]
     infos = create_info(ch_names=ch_names, sfreq=sfreq,
