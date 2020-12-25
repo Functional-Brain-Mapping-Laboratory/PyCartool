@@ -1,11 +1,15 @@
 language: python
+
+os:
+  - linux
+  - osx
+  - windows
 python:
   - "3.6"
   - "3.7"
 # command to install dependencies
 install:
   - pip install -r requirements.txt
-  - sudo apt-get install pandoc
 # command to run tests
 script:
   - pytest --cov-report term --cov=pycartool/tests/
