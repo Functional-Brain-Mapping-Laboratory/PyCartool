@@ -1,0 +1,136 @@
+[build-system]
+requires = ['setuptools >= 61.0.0']
+build-backend = 'setuptools.build_meta'
+
+[project]
+name = 'pycartool'
+version = '0.0.1-dev'
+description = "A simple open source Python package for I/O between Cartool"
+                 " and MNE ( and more generally python)"
+readme = 'README.md'
+license = {file = 'LICENSE'}
+requires-python = '>=3.7'
+authors = [
+    {name = 'Victor Férat', email = 'victor.ferat@live.fr'},
+]
+maintainers = [
+    {name = 'Victor Férat', email = 'victor.ferat@live.fr'},
+]
+keywords = [
+    'python',
+    'neuroscience',
+    'neuroimaging',
+    'eeg',
+    'brain',
+]
+classifiers = [
+    'Operating System :: Microsoft :: Windows',
+    'Operating System :: Unix',
+    'Operating System :: MacOS',
+    'Programming Language :: Python :: 3 :: Only',
+    'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Natural Language :: English',
+    'License :: OSI Approved :: BSD License',
+    'Intended Audience :: Science/Research',
+    'Topic :: Scientific/Engineering',
+]
+dependencies = [
+    'numpy>=1.21',
+    'scipy',
+    'mne>=1.0.0',
+    'jinja2',
+    'importlib-metadata; python_version < "3.8"',
+    'importlib-resources; python_version < "3.9"',
+]
+
+[project.optional-dependencies]
+build = ['build', 'twine']
+docs = [
+    'm2r2',
+    'nbsphinx',
+    'numpydoc',
+    'pandas',
+    'pillow',
+    'pydata-sphinx-theme',
+    'pymatreader',
+    'recommonmark',
+    'sphinx',
+    'sphinx_gallery',
+]
+style = [
+    'black',
+    'codespell',
+    'isort',
+    'flake8',
+    'pydocstyle[toml]',
+]
+test = [
+    'pymatreader',
+    'pytest==7.0.1',
+    'pytest-azurepipelines',
+    'pytest-cov',
+]
+all = [
+    'pycartool[build]',
+    'pycartool[docs]',
+    'pycartool[style]',
+    'pycartool[test]',
+]
+
+[project.urls]
+homepage = 'https://pycartool.readthedocs.io/en/main/'
+documentation = 'https://pycartool.readthedocs.io/en/main/'
+source = 'https://github.com/Functional-Brain-Mapping-Laboratory/PyCartool'
+tracker = 'https://github.com/Functional-Brain-Mapping-Laboratory/PyCartool/issues'
+
+[tool.setuptools]
+include-package-data = false
+
+[tool.setuptools.packages.find]
+include = ['pycartool*']
+exclude = ['pycartool*tests']
+
+[tool.setuptools.package-data]
+"pycartool.html_templates" = ["repr/*.jinja"]
+
+[tool.black]
+line-length = 79
+target-version = ['py37']
+include = '\.pyi?$'
+extend-exclude = '''
+(
+      __pycache__
+    | \.github
+    | setup.py
+    | docs/
+    | tutorials/
+    | pycrostates/html_templates/repr
+)
+'''
+
+[tool.isort]
+profile = 'black'
+multi_line_output = 3
+line_length = 79
+py_version = 37
+extend_skip_glob = [
+    'setup.py',
+    'docs/*',
+    'tutorials/*',
+    'pycartool/html_templates/repr/*'
+]
+
+[tool.pydocstyle]
+convention = 'numpy'
+ignore-decorators= '(copy_doc|property|.*setter|.*getter)'
+match = '^(?!setup|__init__|test_).*\.py'
+match-dir = '^(?!docs|tutorials|build|dist|\.).*'
+add_ignore = 'D100,D104,D107'
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore:Matplotlib is currently using agg:UserWarning",
+]
