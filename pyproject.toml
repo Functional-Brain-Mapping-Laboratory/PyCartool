@@ -5,8 +5,7 @@ build-backend = 'setuptools.build_meta'
 [project]
 name = 'pycartool'
 version = '0.0.1-dev'
-description = "A simple open source Python package for I/O between Cartool"
-                 " and MNE ( and more generally python)"
+description = "A simple open source Python package for I/O between Cartool and MNE ( and more generally python)"
 readme = 'README.md'
 license = {file = 'LICENSE'}
 requires-python = '>=3.7'
