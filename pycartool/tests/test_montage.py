@@ -5,8 +5,8 @@
 import os
 
 from mne.channels import DigMontage
-from ..io.montage import read_xyz
 
+from ..io.montage import read_xyz
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 data_path = os.path.join(dir_path, "data")

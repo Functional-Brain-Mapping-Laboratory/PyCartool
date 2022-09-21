@@ -3,65 +3,66 @@
 #
 # License: BSD (3-clause)
 import os
-import pytest
+
 import numpy as np
+import pytest
 
 from ..io.inverse_solution import read_is
-from ..source_estimate import read_ris, SourceEstimate
 from ..regions_of_interest import RegionsOfInterest
+from ..source_estimate import SourceEstimate, read_ris
 from ..source_space import SourceSpace
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
-data_path = os.path.join(dir_path, 'data')
+data_path = os.path.join(dir_path, "data")
 
 
 def generate_source_space(size):
     """Generate Source space."""
-    source_names = [('S' + str(i)) for i in range(0, size)]
+    source_names = [("S" + str(i)) for i in range(0, size)]
     source_coords = np.random.rand(size, 3)
     source_space = SourceSpace(source_names, source_coords)
-    return(source_space)
+    return source_space
 
 
 def generate_source_estimate(n_sources, n_times, sfreq):
     """Generate Source Estimate."""
     sources_tc = np.random.rand(n_sources, 3, n_times)
     source_estimate = SourceEstimate(sources_tc, sfreq)
-    return(source_estimate)
+    return source_estimate
 
 
 def generate_rois(n_roi, n_sources):
     """Generate Rois."""
-    rois_names = [('R' + str(i)) for i in range(0, n_roi)]
+    rois_names = [("R" + str(i)) for i in range(0, n_roi)]
     roi_indices = []
     for i in range(0, n_roi):
-        indices = np.random.randint(0, n_sources, size=i+1).tolist()
+        indices = np.random.randint(0, n_sources, size=i + 1).tolist()
         roi_indices.append(indices)
     regions_of_interest = RegionsOfInterest(rois_names, roi_indices)
-    return(regions_of_interest)
+    return regions_of_interest
 
 
-@pytest.mark.skip(reason='Requires large file')
+@pytest.mark.skip(reason="Requires large file")
 def test_read_is():
     """Test read_is."""
-    file_path = os.path.join('test')
+    file_path = os.path.join("test")
     inverse_solution = read_is(file_path)
-    if not inverse_solution['is_type'] == 'IS03':
+    if not inverse_solution["is_type"] == "IS03":
         raise AssertionError()
 
 
 def test_read_ris():
     """Test read_ris."""
-    file_path = os.path.join(data_path, 'sample_test_ris.ris')
+    file_path = os.path.join(data_path, "sample_test_ris.ris")
     read_ris(file_path)
 
 
 def test_write_ris():
     """Test write_is."""
-    file_path = os.path.join(data_path, 'sample_test_write_ris.ris')
-    sources_tc = np.random.rand(5000, 3, 2048).astype('float32')
+    file_path = os.path.join(data_path, "sample_test_write_ris.ris")
+    sources_tc = np.random.rand(5000, 3, 2048).astype("float32")
     sfreq = 512
-    subject = 'test_subject'
+    subject = "test_subject"
     source_estimate = SourceEstimate(sources_tc, sfreq, subject=subject)
     source_estimate.save(file_path)
     read_source_estimate = read_ris(file_path)
@@ -78,9 +79,9 @@ def test_compute_tc():
     source_space = generate_source_space(5000)
     source_estimate = generate_source_estimate(5000, 2048, 512)
     source_estimate.source_space = source_space
-    tc_mean = source_estimate.compute_tc(method='mean')
-    tc_med = source_estimate.compute_tc(method='median')
-    tc_svd = source_estimate.compute_tc(method='svd')
+    tc_mean = source_estimate.compute_tc(method="mean")
+    tc_med = source_estimate.compute_tc(method="median")
+    tc_svd = source_estimate.compute_tc(method="svd")
     print(tc_mean.shape)
     if not tc_mean.shape == (3, 2048):
         raise AssertionError()

@@ -4,6 +4,7 @@
 # License: BSD (3-clause)
 
 import os
+
 from ..regions_of_interest import read_roi
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
