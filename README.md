@@ -13,7 +13,7 @@ A simple open source Python package for I/O between Cartool and python
 Cartool is the EEG analysis software developped at the Functional Brain Mapping Lab (FBMLab), in Geneva, Switzerland. This project was initiated in 1996, and is still actively developped up to these days. It has been entirely programmed by Denis Brunet in C++, and doesn't rely on any other dependency to run.
 from [Cartool website](https://sites.google.com/site/cartoolcommunity/about).
 
-![alt text](./img/Cartool.PNG "Cartool")
+![alt text](./docs/_static//img/Cartool.PNG "Cartool")
 
 ## Installation
 

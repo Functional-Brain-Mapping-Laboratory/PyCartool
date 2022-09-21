@@ -2,7 +2,7 @@
 #
 # This file only contains a selection of the most common options. For a full
 # list see the documentation:
-# http://www.sphinx-doc.org/en/master/config
+# https://www.sphinx-doc.org/en/master/usage/configuration.html
 
 # -- Path setup --------------------------------------------------------------
 
@@ -11,18 +11,17 @@
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 import os
-import sys
-import sphinx_bootstrap_theme
+
+from recommonmark.transform import AutoStructify
+from sphinx_gallery.sorting import ExplicitOrder
+
 curdir = os.path.dirname(__file__)
 
-sys.path.append(os.path.abspath(os.path.join(curdir, '..', 'pycartool')))
-sys.path.insert(0, os.path.abspath('../..'))
 # -- Project information -----------------------------------------------------
 
 project = 'PyCartool'
-copyright = '2019, Victor Férat / Tanguy Vivier'
+copyright = '2019 - 2022, Victor Férat / Tanguy Vivier'
 author = 'Victor Férat / Tanguy Vivier'
-
 
 # -- General configuration ---------------------------------------------------
 
@@ -30,41 +29,127 @@ author = 'Victor Férat / Tanguy Vivier'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-   'sphinx.ext.autodoc',
-   'sphinx.ext.napoleon',
-   'sphinx.ext.autosummary',
-   'sphinx.ext.doctest',
-   'sphinx.ext.coverage',
-   'sphinx.ext.mathjax',
-   'sphinx.ext.viewcode',
-   'sphinx.ext.intersphinx',
-   'nbsphinx']
+    "sphinx.ext.autodoc",
+    "sphinx.ext.napoleon",
+    "sphinx.ext.autosummary",
+    "sphinx.ext.autosectionlabel",
+    "sphinx.ext.doctest",
+    "sphinx.ext.coverage",
+    "sphinx.ext.mathjax",
+    "sphinx.ext.viewcode",
+    "sphinx.ext.intersphinx",
+    "nbsphinx",
+    "sphinx_gallery.gen_gallery",
+    "recommonmark",
+    "numpydoc",
+]
+
+
+# sphinx
+master_doc = "index"
+
+# autodoc
+autodoc_typehints = 'none'
+
+# pygments style
+pygments_style = "default"
+
+# A list of ignored prefixes for module index sorting.
+modindex_common_prefix = ["pycartool."]
+
+# autosummary
+autosummary_generate = True
+autodoc_default_options = {"inherited-members": None}
 
 # intersphinx_mapping
 intersphinx_mapping = {
-    'python': ('https://docs.python.org/3', None),
-    'numpy': ('https://numpy.org/devdocs', None),
-    'mne': ('https://mne.tools/stable/', None)
+    "python": ("https://docs.python.org/3", None),
+    "numpy": ("https://numpy.org/devdocs", None),
+    "scipy": ("https://scipy.github.io/devdocs", None),
+    "matplotlib": ("https://matplotlib.org", None),
+    "mne": ("https://mne.tools/stable/", None),
+    "joblib": ("https://joblib.readthedocs.io/en/latest", None),
+    "pandas": ("https://pandas.pydata.org/pandas-docs/stable/", None),
+    "sklearn": ("https://scikit-learn.org/stable/", None),
+}
+
+# numpy doc
+numpydoc_class_members_toctree = False
+numpydoc_attributes_as_param_list = True
+numpydoc_xref_param_type = True
+
+# sphinx_gallery_conf
+sphinx_gallery_conf = {
+    "examples_dirs": os.path.abspath(
+        os.path.join(curdir, "..", "..", "tutorials")
+    ),
+    "gallery_dirs": "auto_tutorials",
+    "reference_url": {"pycartool": None},  # current lib uses None
+    "backreferences_dir": "generated/backreferences",
+    "doc_module": ("pycartool",),
 }
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
 
-
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'bootstrap'
-html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
+html_theme = "pydata_sphinx_theme"
 
+html_theme_options = {
+    "icon_links": [
+        {
+            "name": "GitHub",
+            "url": "https://github.com/Functional-Brain-Mapping-Laboratory/PyCartool",
+            "icon": "fab fa-github-square",
+        },
+    ],
+    "external_links": [
+        {"name": "MNE", "url": "https://mne.tools/stable/index.html"}
+    ],
+}
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = [os.path.abspath(os.path.join(curdir, "../_static"))]
+
+
+def append_attr_meth_examples(app, what, name, obj, options, lines):
+    """Append SG examples backreferences to method and attr docstrings."""
+    # NumpyDoc nicely embeds method and attribute docstrings for us, but it
+    # does not respect the autodoc templates that would otherwise insert
+    # the .. include:: lines, so we need to do it.
+    # Eventually this could perhaps live in SG.
+    if what in ("attribute", "method"):
+        size = os.path.getsize(
+            os.path.join(
+                os.path.dirname(__file__),
+                "generated",
+                "backreferences",
+                "%s.examples" % (name,),
+            )
+        )
+        if size > 0:
+            lines += """
+.. _sphx_glr_backreferences_{1}:
+.. rubric:: Examples using ``{0}``:
+.. minigallery:: {1}
+""".format(
+                name.split(".")[-1], name
+            ).split(
+                "\n"
+            )
+
+
+# -- Auto-convert markdown pages to demo --------------------------------------
+def setup(app):
+    app.connect("autodoc-process-docstring", append_attr_meth_examples)
+    app.add_transform(AutoStructify)
