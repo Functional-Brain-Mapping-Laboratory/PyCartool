@@ -25,7 +25,9 @@ def read_is(filename):
     with open(filename, "rb") as f:
         print(f"Reading {filename}")
         print(f"Reading Header...")
-        is_type = [struct.unpack("c", f.read(1))[0].decode("utf-8") for i in range(4)]
+        is_type = [
+            struct.unpack("c", f.read(1))[0].decode("utf-8") for i in range(4)
+        ]
         is_type = "".join(is_type)
         if is_type not in ["IS01", "IS02", "IS03"]:
             print(
@@ -66,12 +68,16 @@ def read_is(filename):
 
             ch_names = []
             for _ in range(n_channels):
-                name = [char for char in f.read(32).split(b"\x00") if char != b""][0]
+                name = [
+                    char for char in f.read(32).split(b"\x00") if char != b""
+                ][0]
                 ch_names.append(name.decode("utf-8"))
 
             solutionpoints_names = []
             for _ in range(numsolutionpoints):
-                name = [char for char in f.read(16).split(b"\x00") if char != b""][0]
+                name = [
+                    char for char in f.read(16).split(b"\x00") if char != b""
+                ][0]
                 solutionpoints_names.append(name.decode("utf-8"))
 
             regularizations_values = []
@@ -82,7 +88,9 @@ def read_is(filename):
 
             regularizations_names = []
             for _ in range(numregularizations):
-                name = [char for char in f.read(32).split(b"\x00") if char != b""][0]
+                name = [
+                    char for char in f.read(32).split(b"\x00") if char != b""
+                ][0]
                 regularizations_names.append(name.decode("utf-8"))
             print(f"Regularizations names: {regularizations_names}")
 

@@ -19,11 +19,13 @@ def _check_sources_tc(sources_tc):
         raise TypeError(f"sources_tc must be an instance of numpy.ndarray")
     if sources_tc.ndim != 3:
         raise ValueError(
-            f"sources_tc must be of shape" f"(n_solutionpoints, n_dim, n_timeframes)"
+            f"sources_tc must be of shape"
+            f"(n_solutionpoints, n_dim, n_timeframes)"
         )
     if sources_tc.shape[1] not in [1, 3]:
         raise ValueError(
-            f"sources_tc.shape[1] must be either 1 ( scalar) " f"or 3 (vectorial)"
+            f"sources_tc.shape[1] must be either 1 ( scalar) "
+            f"or 3 (vectorial)"
         )
     return sources_tc
 
@@ -47,7 +49,9 @@ def read_ris(filename, source_space=None, subject=None):
     with open(filename, "rb") as f:
         print(f"Reading {filename}")
         print(f"Reading Header...")
-        ris_type = [struct.unpack("c", f.read(1))[0].decode("utf-8") for i in range(4)]
+        ris_type = [
+            struct.unpack("c", f.read(1))[0].decode("utf-8") for i in range(4)
+        ]
         ris_type = "".join(ris_type)
         if ris_type not in ["RI01"]:
             raise ValueError(
@@ -112,7 +116,8 @@ def write_ris(source_estimate, filename):
         isinversescalar = b"\x00"
     else:
         raise ValueError(
-            "Input data must have shape (_,1,_) (scalar)" " or (_,3,_) (vectorial)"
+            "Input data must have shape (_,1,_) (scalar)"
+            " or (_,3,_) (vectorial)"
         )
     ris_type = "RI01"
     n_timeframes = data.shape[0]
@@ -174,7 +179,9 @@ class SourceEstimate(object):
         # Check that source estimate correspond to source space
         if source_space is not None:
             if not isinstance(source_space, SourceSpace):
-                raise TypeError(f"sourcespace must be an instance" f" of SourceSpace.")
+                raise TypeError(
+                    f"sourcespace must be an instance" f" of SourceSpace."
+                )
             if not len(source_space.names) == sources_tc.shape[0]:
                 raise ValueError(
                     f"Expect {len(source_space.names)} time "
@@ -222,7 +229,8 @@ class SourceEstimate(object):
                 write_spi(filename[:-3] + ".spi", self.source_space)
             else:
                 raise ValueError(
-                    "Cannot save source space to file, source " "space is not defined"
+                    "Cannot save source space to file, source "
+                    "space is not defined"
                 )
 
     def per_roi(self, region_of_interest):
@@ -324,7 +332,10 @@ class SourceEstimate(object):
         rois_estimates = self.per_roi(region_of_interest)
         rois_tc = np.array([roi.compute_tc() for roi in rois_estimates])
         rois_coordinates = np.array(
-            [estimate.source_space.get_center_of_mass() for estimate in rois_estimates]
+            [
+                estimate.source_space.get_center_of_mass()
+                for estimate in rois_estimates
+            ]
         )
         Roi_source_space = SourceSpace(rois_names, rois_coordinates)
         Roi_source_estimate = SourceEstimate(

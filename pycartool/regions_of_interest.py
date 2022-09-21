@@ -105,13 +105,17 @@ class RegionsOfInterest(object):
 
     """
 
-    def __init__(self, names, groups_of_indexes, source_space=None, filename=None):
+    def __init__(
+        self, names, groups_of_indexes, source_space=None, filename=None
+    ):
         _check_groups_of_indexes(groups_of_indexes)
         maximum = _compute_number_of_sources(groups_of_indexes)
         # Check that groups_of_indexes correspond to source space.
         if source_space is not None:
             if not isinstance(source_space, SourceSpace):
-                raise TypeError(f"sourcespace must be an instance" f" of SourceSpace.")
+                raise TypeError(
+                    f"sourcespace must be an instance" f" of SourceSpace."
+                )
             if source_space.n_sources < maximum:
                 raise ValueError(
                     f"Indice {maximum} found in groups_of_indexes"

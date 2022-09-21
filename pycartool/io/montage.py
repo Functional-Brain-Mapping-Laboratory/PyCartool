@@ -22,8 +22,12 @@ def read_xyz(filename):
     """
 
     n = int(open(filename).readline().lstrip().split(" ")[0])
-    coord = np.loadtxt(filename, skiprows=1, usecols=(0, 1, 2), max_rows=n) / 1e3
-    names = np.loadtxt(filename, skiprows=1, usecols=3, max_rows=n, dtype=np.dtype(str))
+    coord = (
+        np.loadtxt(filename, skiprows=1, usecols=(0, 1, 2), max_rows=n) / 1e3
+    )
+    names = np.loadtxt(
+        filename, skiprows=1, usecols=3, max_rows=n, dtype=np.dtype(str)
+    )
     names = names.tolist()
     ch_pos = dict()
     for i, name in enumerate(names):
