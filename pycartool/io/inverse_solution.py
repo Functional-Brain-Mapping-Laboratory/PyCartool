@@ -9,6 +9,7 @@ import numpy as np
 from ..utils._logs import logger, verbose
 
 
+@verbose
 def read_is(filename, verbose=None):
     """Read Cartool inverse solution (.is) file.
 
