@@ -62,9 +62,7 @@ def read_sef(filename):
     # Create infos
     description = "Imported with Pycartool"
     try:
-        record_time = dt.datetime(
-            year, month, day, hour, minute, second
-        ).timetuple()
+        record_time = dt.datetime(year, month, day, hour, minute, second).timetuple()
         meas_date = (time.mktime(record_time), millisecond)
     except Exception as e:
         logger.info("Cannot read recording date from file")

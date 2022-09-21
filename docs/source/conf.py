@@ -19,9 +19,9 @@ curdir = os.path.dirname(__file__)
 
 # -- Project information -----------------------------------------------------
 
-project = 'PyCartool'
-copyright = '2019 - 2022, Victor Férat / Tanguy Vivier'
-author = 'Victor Férat / Tanguy Vivier'
+project = "PyCartool"
+copyright = "2019 - 2022, Victor Férat / Tanguy Vivier"
+author = "Victor Férat / Tanguy Vivier"
 
 # -- General configuration ---------------------------------------------------
 
@@ -49,7 +49,7 @@ extensions = [
 master_doc = "index"
 
 # autodoc
-autodoc_typehints = 'none'
+autodoc_typehints = "none"
 
 # pygments style
 pygments_style = "default"
@@ -80,9 +80,7 @@ numpydoc_xref_param_type = True
 
 # sphinx_gallery_conf
 sphinx_gallery_conf = {
-    "examples_dirs": os.path.abspath(
-        os.path.join(curdir, "..", "..", "tutorials")
-    ),
+    "examples_dirs": os.path.abspath(os.path.join(curdir, "..", "..", "tutorials")),
     "gallery_dirs": "auto_tutorials",
     "reference_url": {"pycartool": None},  # current lib uses None
     "backreferences_dir": "generated/backreferences",
@@ -112,9 +110,7 @@ html_theme_options = {
             "icon": "fab fa-github-square",
         },
     ],
-    "external_links": [
-        {"name": "MNE", "url": "https://mne.tools/stable/index.html"}
-    ],
+    "external_links": [{"name": "MNE", "url": "https://mne.tools/stable/index.html"}],
 }
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

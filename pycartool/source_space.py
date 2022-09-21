@@ -14,9 +14,7 @@ def _checkcoordinates(coordinates):
     if not coordinates.ndim == 2:
         raise ValueError(f"coordinates must have 2 dimension (ndim=2)")
     if not coordinates.shape[1] == 3:
-        raise ValueError(
-            f"coordinates must be of shape " f"(n_solutions_points, 3)"
-        )
+        raise ValueError(f"coordinates must be of shape " f"(n_solutions_points, 3)")
     return coordinates
 
 
@@ -30,8 +28,7 @@ def _checksubject(subject):
     if subject is not None:
         if not isinstance(subject, str):
             raise ValueError(
-                f"Subject must be a string but type "
-                f"{type(subject)} was found."
+                f"Subject must be a string but type " f"{type(subject)} was found."
             )
     return subject
 
@@ -57,9 +54,7 @@ def read_spi(filename, subject=None):
         coord = [elem[:-1] for elem in d]
         coord = np.array(coord)
         coord = coord.astype(np.float)
-        Source_Space = SourceSpace(
-            names, coord, filename=filename, subject=subject
-        )
+        Source_Space = SourceSpace(names, coord, filename=filename, subject=subject)
     return Source_Space
 
 
