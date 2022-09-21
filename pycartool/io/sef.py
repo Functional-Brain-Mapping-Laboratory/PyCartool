@@ -15,9 +15,7 @@ from mne.utils import logger, verbose
 
 
 def read_sef(filename):
-    """
-    Reads file with format .sef, and returns a mne.io.Raw object containing
-    the data.
+    """Read file with format .sef, and returns a mne.io.Raw.
 
     Parameters
     ----------

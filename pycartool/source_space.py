@@ -45,6 +45,7 @@ def read_spi(filename, subject=None):
         The spi file to read.
     subject : str
         The subject used to create the source space.
+
     Returns
     -------
     SourceSpace : pycartool.source_space.SourceSpace
@@ -128,7 +129,8 @@ class SourceSpace(object):
         self.coordinates = coordinates
         self.filename = filename
 
-    def __repr__(self):
+    def __repr__(self): # noqa: D401
+        """String representation."""
         s = f"{self.n_sources} sources"
         if self.subject is not None:
             s += f", subject : {self.subject}"

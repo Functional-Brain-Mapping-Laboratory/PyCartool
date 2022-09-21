@@ -128,7 +128,8 @@ class RegionsOfInterest(object):
         self.source_space = source_space
         self.filename = filename
 
-    def __repr__(self):
+    def __repr__(self): # noqa: D401
+        """String representation."""
         s = f"{len(self.names)} Rois"
         if self.filename is not None:
             s += f", filename : {self.filename}"

@@ -41,6 +41,7 @@ def read_ris(filename, source_space=None, subject=None):
         The SourceSpace corresponding to the source estimate.
     subject : str or file-like
         The subject used to create the source estimate.
+
     Returns
     -------
     source_estimate : pycartool.source_estimate.SourceEstimate
@@ -200,7 +201,8 @@ class SourceEstimate(object):
         self.subject = subject
         self.filename = filename
 
-    def __repr__(self):
+    def __repr__(self):  # noqa: D401
+        """String representation."""
         if self.is_scalar is True:
             s = f"Scalar, "
         else:

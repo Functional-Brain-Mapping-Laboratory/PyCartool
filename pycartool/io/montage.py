@@ -9,18 +9,18 @@ from mne.channels import make_dig_montage
 
 
 def read_xyz(filename):
-    """Reads and convert xyz positions to a mne montage type
+    """Read and convert xyz positions to a mne montage type.
 
     Parameters
     ----------
     filename : str
         The filename of the xyz file.
+
     Returns
     -------
     montage : mne.channels.montage.Montage
         Montage for EEG electrode locations.
     """
-
     n = int(open(filename).readline().lstrip().split(" ")[0])
     coord = (
         np.loadtxt(filename, skiprows=1, usecols=(0, 1, 2), max_rows=n) / 1e3
@@ -46,7 +46,6 @@ def write_xyz(filename, info):
     info : mne.Info
         The info object use to extract the montage.
     """
-
     pos = np.array([e["loc"][:3] for e in info["chs"]]).reshape(-1, 3) * 1e3
     names = info["ch_names"]
     n = len(names)
