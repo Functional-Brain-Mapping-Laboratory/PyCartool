@@ -7,9 +7,9 @@ ignore =
     E203,
     # line break before binary operator
     W503,
-    E241,E305,W504,W605,E731
+    E241,E305,W504,W605,E731,
     # f-string missing placeholders
-    F541
+    F541,
 
 exclude =
     .git,
