@@ -2,10 +2,12 @@
 # Authors: Victor Férat <victor.ferat@live.fr>
 #
 # License: BSD (3-clause)
+from ..utils._logs import logger, verbose
 from .source_space import SourceSpace
 
 
-def read_roi(filename, source_space=None):
+@verbose
+def read_roi(filename, source_space=None, verbose=None):
     """Read Cartool region of interest (.rois) files.
 
     Parameters
@@ -30,13 +32,12 @@ def read_roi(filename, source_space=None):
     with open(filename) as f:
         Roi_type = f.readline().strip()
         if Roi_type != "RO01":
-            print(f"{Roi_type} format not supported")
-            raise ValueError
-        print(Roi_type)
+            raise ValueError(f"{Roi_type} format not supported")
+        logger.info(Roi_type)
         n_orig = int(f.readline().strip())
-        print(f"Dimension_of_original_data: {n_orig}")
+        logger.info(f"Dimension_of_original_data: {n_orig}")
         n_roi = int(f.readline().strip())
-        print(f"Number of ROI: {n_roi}")
+        logger.info(f"Number of ROI: {n_roi}")
         rois_name = []
         rois_elements = []
         for _ in range(0, n_roi):
@@ -128,7 +129,7 @@ class RegionsOfInterest(object):
         self.source_space = source_space
         self.filename = filename
 
-    def __repr__(self): # noqa: D401
+    def __repr__(self):  # noqa: D401
         """String representation."""
         s = f"{len(self.names)} Rois"
         if self.filename is not None:

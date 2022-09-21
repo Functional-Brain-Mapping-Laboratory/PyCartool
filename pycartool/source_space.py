@@ -129,7 +129,7 @@ class SourceSpace(object):
         self.coordinates = coordinates
         self.filename = filename
 
-    def __repr__(self): # noqa: D401
+    def __repr__(self):  # noqa: D401
         """String representation."""
         s = f"{self.n_sources} sources"
         if self.subject is not None:

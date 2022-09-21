@@ -7,6 +7,7 @@ import struct
 import numpy as np
 
 from .source_space import SourceSpace, write_spi
+from .utils._logs import logger, verbose
 
 
 def _check_method(method):
@@ -30,7 +31,8 @@ def _check_sources_tc(sources_tc):
     return sources_tc
 
 
-def read_ris(filename, source_space=None, subject=None):
+@verbose
+def read_ris(filename, source_space=None, subject=None, verbose=None):
     """Read Cartool Results of Inverse Solution computation (.ris) file.
 
     Parameters
@@ -48,8 +50,8 @@ def read_ris(filename, source_space=None, subject=None):
         The SourceEstimate extracted from ris file.
     """
     with open(filename, "rb") as f:
-        print(f"Reading {filename}")
-        print(f"Reading Header...")
+        logger.info(f"Reading {filename}")
+        logger.info(f"Reading Header...")
         ris_type = [
             struct.unpack("c", f.read(1))[0].decode("utf-8") for i in range(4)
         ]
@@ -60,20 +62,20 @@ def read_ris(filename, source_space=None, subject=None):
                 f" input file is a Result of Inverse Solution "
                 f" computation"
             )
-        print(f"IS type: {ris_type}")
+        logger.info(f"IS type: {ris_type}")
         n_solutionpoints = struct.unpack("I", f.read(4))[0]
-        print(f"n_solutionpoints: {n_solutionpoints}")
+        logger.info(f"n_solutionpoints: {n_solutionpoints}")
         n_timeframes = struct.unpack("I", f.read(4))[0]
-        print(f"n_timeframes: {n_timeframes}")
+        logger.info(f"n_timeframes: {n_timeframes}")
         s_freq = struct.unpack("f", f.read(4))[0]
-        print(f"Samplimg frequency: {s_freq}")
+        logger.info(f"Samplimg frequency: {s_freq}")
         isinversescalar = struct.unpack("c", f.read(1))[0]
-        print(isinversescalar)
+        logger.info(isinversescalar)
         if isinversescalar == b"\x01":
             n_dim = 1
-            print(f"Result of Inverse Solution computation is Scalar")
+            logger.info(f"Result of Inverse Solution computation is Scalar")
         elif isinversescalar == b"\x00":
-            print(f"Result of Inverse Solution computation is Vectorial")
+            logger.info(f"Result of Inverse Solution computation is Vectorial")
             n_dim = 3
         else:
             raise ValueError(

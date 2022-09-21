@@ -41,6 +41,7 @@ dependencies = [
     'numpy>=1.21',
     'scipy',
     'mne>=1.0.0',
+    'decorator',
     'jinja2',
     'importlib-metadata; python_version < "3.8"',
     'importlib-resources; python_version < "3.9"',

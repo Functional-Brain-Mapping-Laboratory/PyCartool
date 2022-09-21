@@ -11,10 +11,12 @@ import mne
 import numpy as np
 from mne import create_info
 from mne.io import RawArray
-from mne.utils import logger, verbose
+
+from ..utils._logs import logger, verbose
 
 
-def read_sef(filename):
+@verbose
+def read_sef(filename, verbose=None):
     """Read file with format .sef, and returns a mne.io.Raw.
 
     Parameters
