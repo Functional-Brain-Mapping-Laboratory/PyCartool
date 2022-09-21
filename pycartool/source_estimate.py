@@ -243,7 +243,7 @@ class SourceEstimate(object):
 
         Returns
         -------
-        rois_source_estimate : :obj:`list` of :obj:`pycartool.source_estimate.SourceEstimate`
+        rois_source_estimate : :obj:`list` of :obj:`pycartool.source_estimate.SourceEstimate` # noqa
             A list of Source estimate instance restricted to a Region of
             interest
 
