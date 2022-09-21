@@ -71,8 +71,8 @@ def read_sef(filename):
     infos = create_info(ch_names=ch_names, sfreq=sfreq,
                         ch_types=ch_types)
     infos['description'] = description
-    infos['meas_date'] = meas_date
     raw = RawArray(np.transpose(data), infos)
+    raw.set_meas_date('meas_date')
     return (raw)
 
 

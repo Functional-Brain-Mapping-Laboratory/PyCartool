@@ -39,18 +39,23 @@ def read_is(filename):
         numregularizations = struct.unpack('I', f.read(4))[0]
         print(f'n_regularizations: {numregularizations}')
         isinversescalar = struct.unpack('c', f.read(1))[0]
-        if isinversescalar == '0':
+        if isinversescalar == b'\x01':
             n_dim = 1
             print(f'Inverse solution is Scalar')
-        else:
+        elif isinversescalar == b'\x00':
             print(f'Inverse solution is Vectorial')
             n_dim = 3
+        else:
+            raise ValueError(f'isinversescalar must be either 1 for scalar, '
+                             f'either 0 for vectorial, but '
+                             f'{ord(isinversescalar)} found.')
 
         if is_type in ['IS01', 'IS02']:
             buf = f.read(n_dim * numsolutionpoints * n_channel * 4)
             data = np.frombuffer(buf, dtype=np.float32)
-            data = data.reshape(ndim, numsolutionpoints, n_channel)
+            data = data.reshape(numsolutionpoints, ndim, n_channel)
             data = no.array([data])
+            data = np.swapaxes(data, 1, 2)
 
         elif is_type == 'IS03':
             print(f"Reading Variable Header...")
