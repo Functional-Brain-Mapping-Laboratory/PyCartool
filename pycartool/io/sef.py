@@ -36,7 +36,7 @@ def read_sef(filename, verbose=None):
         print(f"Version : {version} not supported")
         raise ValueError()
     (n_channels,) = struct.unpack("I", f.read(4))
-    (num_aux_electrodes,) = struct.unpack("I", f.read(4)) # noqa F841
+    (num_aux_electrodes,) = struct.unpack("I", f.read(4))  # noqa F841
     (num_time_frames,) = struct.unpack("I", f.read(4))
     (sfreq,) = struct.unpack("f", f.read(4))
     (year,) = struct.unpack("H", f.read(2))
