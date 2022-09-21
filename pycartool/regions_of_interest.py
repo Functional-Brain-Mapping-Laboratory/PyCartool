@@ -2,8 +2,8 @@
 # Authors: Victor Férat <victor.ferat@live.fr>
 #
 # License: BSD (3-clause)
-from ..utils._logs import logger, verbose
 from .source_space import SourceSpace
+from .utils._logs import logger, verbose
 
 
 @verbose
