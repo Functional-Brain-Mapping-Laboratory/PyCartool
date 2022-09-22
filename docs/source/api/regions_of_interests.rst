@@ -12,9 +12,4 @@ Regions of interest
    :toctree: generated/
 
    RegionsOfInterest
-
-
-References
-----------
-
-.. footbibliography::
+   

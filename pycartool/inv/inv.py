@@ -18,6 +18,7 @@ def read_is(filename, verbose=None):
     ----------
     filename : str or file-like
         Path to the inverse solution file ``(.is``) to read.
+    %(verbose)s
 
     Returns
     -------

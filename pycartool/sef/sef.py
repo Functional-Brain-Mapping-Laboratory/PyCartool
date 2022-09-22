@@ -25,6 +25,7 @@ def read_sef(filename, verbose=None):
     ----------
     filename : str or file-like
         The Simple EEG (``.sef``) file to read.
+    %(verbose)s
 
     Returns
     -------
