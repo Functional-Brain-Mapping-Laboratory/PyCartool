@@ -145,3 +145,5 @@ dmypy.json
 
 # PyBuilder
 target/
+test-output.xml
+test.ris

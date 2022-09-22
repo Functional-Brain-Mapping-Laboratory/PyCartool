@@ -41,6 +41,17 @@ def generate_rois(n_roi, n_sources):
     regions_of_interest = RegionsOfInterest(rois_names, roi_indices)
     return regions_of_interest
 
+sfreq = 1
+n_samples = 500
+n_sources = 100
+n_rois = 10
+source_space = generate_source_space(n_sources)
+
+source_estimate = generate_source_estimate(n_sources, n_samples, sfreq)
+source_estimate.source_space = source_space
+
+regions_of_interest = generate_rois(n_rois, n_sources)
+regions_of_interest.source_space = source_space
 
 @pytest.mark.skip(reason="Requires large file")
 def test_read_is():
@@ -59,59 +70,33 @@ def test_read_ris():
 
 def test_write_ris():
     """Test write_is."""
-    file_path = os.path.join(data_path, "sample_test_write_ris.ris")
-    sources_tc = np.random.rand(5000, 3, 2048).astype("float32")
-    sfreq = 512
-    subject = "test_subject"
-    source_estimate = SourceEstimate(sources_tc, sfreq, subject=subject)
-    source_estimate.save(file_path)
-    read_source_estimate = read_ris(file_path)
-    if not (read_source_estimate.sources_tc == sources_tc).all():
-        raise AssertionError()
-    if not read_source_estimate.sfreq == sfreq:
-        raise AssertionError()
-    if not read_source_estimate.filename == file_path:
-        raise AssertionError()
+    source_estimate.save("test.ris")
+    read_source_estimate = read_ris("test.ris")
+    assert np.allclose(read_source_estimate.sources_tc, source_estimate.sources_tc)
+    assert read_source_estimate.sfreq == source_estimate.sfreq
+    assert read_source_estimate.filename == "test.ris"
 
 
 def test_compute_tc():
     """Test SourceEstimate.compute_tc."""
-    source_space = generate_source_space(5000)
-    source_estimate = generate_source_estimate(5000, 2048, 512)
-    source_estimate.source_space = source_space
     tc_mean = source_estimate.compute_tc(method="mean")
+    assert tc_mean.shape == (3, n_samples)
+
     tc_med = source_estimate.compute_tc(method="median")
+    assert tc_med.shape == (3, n_samples)
+
     tc_svd = source_estimate.compute_tc(method="svd")
-    print(tc_mean.shape)
-    if not tc_mean.shape == (3, 2048):
-        raise AssertionError()
-    if not tc_med.shape == (3, 2048):
-        raise AssertionError()
-    if not tc_svd.shape == (1, 2048):
-        raise AssertionError()
+    assert tc_svd.shape == (1, n_samples)
 
 
 def test_compute_rois_tc():
     """Test SourceEstimate.compute_rois_tc."""
-    source_space = generate_source_space(5000)
-    source_estimate = generate_source_estimate(5000, 2048, 512)
-    source_estimate.source_space = source_space
-    regions_of_interest = generate_rois(32, 5000)
-    regions_of_interest.source_space = source_space
     rois_estimates = source_estimate.compute_rois_tc(regions_of_interest)
-    if not rois_estimates.sources_tc.shape == (32, 1, 2048):
-        raise AssertionError()
-    if not rois_estimates.sfreq == 512:
-        raise AssertionError()
+    assert rois_estimates.sources_tc.shape == (n_rois, 1, n_samples)
+    assert rois_estimates.sfreq == source_estimate.sfreq
 
 
 def test_per_roi():
     """Test SourceEstimate.per_roi"""
-    source_space = generate_source_space(5000)
-    source_estimate = generate_source_estimate(5000, 2048, 512)
-    source_estimate.source_space = source_space
-    regions_of_interest = generate_rois(32, 5000)
-    regions_of_interest.source_space = source_space
     rois_estimates = source_estimate.per_roi(regions_of_interest)
-    if not len(rois_estimates) == 32:
-        raise AssertionError()
+    assert len(rois_estimates) == n_rois
