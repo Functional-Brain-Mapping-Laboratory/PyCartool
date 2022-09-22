@@ -57,7 +57,7 @@ def read_spi(filename, subject=None):
         names = [elem[-1] for elem in d]
         coord = [elem[:-1] for elem in d]
         coord = np.array(coord)
-        coord = coord.astype(np.float)
+        coord = coord.astype(float)
         Source_Space = SourceSpace(
             names, coord, filename=filename, subject=subject
         )

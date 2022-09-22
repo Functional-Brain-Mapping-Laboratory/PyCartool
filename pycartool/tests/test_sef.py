@@ -20,4 +20,3 @@ def test_read_sef():
 def test_write_sef():
     sef = read_sef(datasef)
     write_sef("test.sef", sef)
-
