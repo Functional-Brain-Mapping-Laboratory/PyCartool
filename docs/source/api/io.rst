@@ -4,26 +4,26 @@ I/O
 I/O for Cartool files :footcite:t:`brunet2011spatiotemporal`.
 
 
-.. currentmodule:: pycartool
+.. currentmodule:: pycartool.io
 
-.. automodule:: pycartool
+.. automodule:: pycartool.io
    :no-members:
    :no-inherited-members:
 
 .. autosummary::
    :toctree: generated/
 
-   sef.read_sef
-   sef.write_sef
-   xyz.read_xyz
-   xyz.write_xyz
-   spi.read_spi
-   spi.write_spi
-   lf.read_lf
-   inv.read_is
-   inv.read_is
-   ris.read_ris
-   ris.write_ris
+   read_sef
+   write_sef
+   read_xyz
+   write_xyz
+   read_spi
+   write_spi
+   read_lf
+   read_is
+   read_is
+   read_ris
+   write_ris
 
 References
 ----------
