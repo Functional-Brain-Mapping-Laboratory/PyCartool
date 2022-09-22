@@ -6,8 +6,8 @@ import struct
 
 import numpy as np
 
-from .source_space import SourceSpace, write_spi
-from .utils._logs import logger, verbose
+from ..spi.source_space import SourceSpace, write_spi
+from ..utils._logs import logger, verbose
 
 
 def _check_method(method):
@@ -33,14 +33,14 @@ def _check_sources_tc(sources_tc):
 
 @verbose
 def read_ris(filename, source_space=None, subject=None, verbose=None):
-    """Read Cartool Results of Inverse Solution computation (.ris) file.
+    """Read Cartool Results of Inverse Solution computation (``.ris``) file.
 
     Parameters
     ----------
     filename : str or file-like
-        the ris file to read.
-    source_space : pycartool.source_space.SourceSpace
-        The SourceSpace corresponding to the source estimate.
+        The ``.ris`` file to read.
+    source_space : `pycartool.spi.SourceSpace`
+        The source space corresponding to the source estimate.
     subject : str or file-like
         The subject used to create the source estimate.
 
@@ -103,8 +103,8 @@ def write_ris(source_estimate, filename):
     Parameters
     ----------
     filename : str or file-like
-        filename of the exported inverse solution computation.
-    source_estimate : pycartool.source_estimate.SourceEstimate
+        Filename of the exported inverse solution computation.
+    source_estimate : `pycartool.ris.SourceEstimate`
         The SourceEstimate to save as a ris file.
     """
     data = source_estimate.sources_tc.T
@@ -145,12 +145,13 @@ class SourceEstimate(object):
 
     Parameters
     ----------
-    sources_tc : numpy.ndarray, shape (n_solutionpoints, n_dim, n_timeframes)
-        The sources time courses. Can be either scalar (ndim=1) or
-        vectorial (ndim=3).
+    sources_tc : `~numpy.array`
+        The sources time courses. Can be either scalar (``ndim=1``) or
+        vectorial (``ndim=3``).
+        shape (``n_solution_points``, ``n_dim``, ``n_timeframes``).
     sfreq : float
         The sampling frequency.
-    source_space : pycartool.source_space.SourceSpace
+    source_space : `pycartool.spi.SourceSpace`
         The SourceSpace corresponding to the source estimate.
     subject : str
         The subject used to create the source estimate.
@@ -163,18 +164,17 @@ class SourceEstimate(object):
         True if estimate is scalar, False is estimate is vectorial.
     n_sources : int
         Number of sources.
-    sources_tc : numpy.ndarray, shape (n_solutionpoints, n_dim, n_timeframes)
-        The sources time courses. Can be either scalar (ndim=1) or
-        vectorial (ndim=3).
-    source_space : pycartool.source_space.SourceSpace
+    sources_tc : `~numpy.array`
+        The sources time courses. Can be either scalar (``ndim=1``) or
+        vectorial (``ndim=3``).
+        shape (``n_solution_points``, ``n_dim``, ``n_timeframes``).
+    source_space : `pycartool.spi.SourceSpace`
         The SourceSpace corresponding to the source estimate.
     subject : str
         The subject used to create the source estimate.
     filename : str
-        filename from which the source estimate was imported.
-
+        Filename from which the source estimate was imported.
     """
-
     def __init__(
         self, sources_tc, sfreq, source_space=None, subject=None, filename=None
     ):
@@ -238,19 +238,18 @@ class SourceEstimate(object):
                 )
 
     def per_roi(self, region_of_interest):
-        """Short summary.
+        """Get source in specific rois.
 
         Parameters
         ----------
-        region_of_interest : pycartool.regions_of_interest.RegionsOfInterest
+        region_of_interest : `pycartool.rois.RegionsOfInterest`
             The region of interest used to split the source estimate.
 
         Returns
         -------
-        rois_source_estimate : :obj:`list` of :obj:`pycartool.source_estimate.SourceEstimate` # noqa
+        rois_source_estimate list of `pycartool.source_estimate.SourceEstimate` # noqa
             A list of Source estimate instance restricted to a Region of
-            interest
-
+            interest.
         """
         # Check is SourceSpace are the equals.
         if self.source_space is None:
@@ -282,20 +281,20 @@ class SourceEstimate(object):
         return rois_source_estimate
 
     def compute_tc(self, method="svd"):
-        """Short summary.
+        """Compute time course.
 
         Parameters
         ----------
         method : str
-            the method use to compute the time course. Can be either 'mean',
+            The method use to compute the time course. Can be either 'mean',
             'median' or 'svd'. Default to 'svd'.
 
         Returns
         -------
-        tc : numpy.ndarray, shape(n_dim, n_times)
+        tc : `~numpy.array``
             The global source estimate time course. Can be either Vectorial or
             Scalar depending of the source estimate and the method.
-
+            shape(``n_dim``, ``n_times``).
         """
         _check_method(method)
         if method == "median":
@@ -315,11 +314,11 @@ class SourceEstimate(object):
         return tc
 
     def compute_rois_tc(self, region_of_interest, method="svd"):
-        """Short summary.
+        """Compute time course in Region of interest.
 
         Parameters
         ----------
-        region_of_interest : pycartool.regions_of_interest.RegionsOfInterest
+        region_of_interest : pycartool.rois.RegionsOfInterest
             The region of interest used to split the source estimate.
         method : str
             the method use to compute the time course. Can be either 'mean',
@@ -327,14 +326,13 @@ class SourceEstimate(object):
 
         Returns
         -------
-        Roi_source_estimate : pycartool.source_estimate.SourceEstimate
+        Roi_source_estimate : pycartool.spi.SourceEstimate
             A source estimate instance where each source correspond to a region
             of interest.
-
         """
         rois_names = region_of_interest.names
         rois_estimates = self.per_roi(region_of_interest)
-        rois_tc = np.array([roi.compute_tc() for roi in rois_estimates])
+        rois_tc = np.array([roi.compute_tc(method=method) for roi in rois_estimates])
         rois_coordinates = np.array(
             [
                 estimate.source_space.get_center_of_mass()

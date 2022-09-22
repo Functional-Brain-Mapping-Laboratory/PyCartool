@@ -7,13 +7,11 @@ import os
 import numpy as np
 import pytest
 
-from ..io.inverse_solution import read_is
-from ..regions_of_interest import RegionsOfInterest
+from ...data import data_path
+from ...inv import read_is
+from ...rois import RegionsOfInterest
+from ...spi import SourceSpace
 from ..source_estimate import SourceEstimate, read_ris
-from ..source_space import SourceSpace
-
-dir_path = os.path.dirname(os.path.realpath(__file__))
-data_path = os.path.join(dir_path, "data")
 
 
 def generate_source_space(size):

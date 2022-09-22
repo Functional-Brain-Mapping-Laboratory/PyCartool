@@ -2,8 +2,8 @@
 # Authors: Victor Férat <victor.ferat@live.fr>
 #
 # License: BSD (3-clause)
-from .source_space import SourceSpace
-from .utils._logs import logger, verbose
+from ..spi.source_space import SourceSpace
+from ..utils._logs import logger, verbose
 
 
 @verbose
@@ -89,7 +89,7 @@ class RegionsOfInterest(object):
     source_space : pycartool.source_space.SourceSpace
         The source space associated to the regions of interest.
     filename : str or file-like
-        The Regions Of Interest file (.roi) from which
+        The Regions Of Interest file (``.roi``) from which
         the data has been extracted.
 
     Attributes
@@ -101,7 +101,7 @@ class RegionsOfInterest(object):
     source_space : pycartool.source_space.SourceSpace
         The source space associated to the regions of interest.
     filename : str or file-like
-        The Regions Of Interest file (.roi) from which
+        The Regions Of Interest file (``.roi``) from which
         the data has been extracted.
 
     """

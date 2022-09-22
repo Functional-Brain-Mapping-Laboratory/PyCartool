@@ -18,7 +18,7 @@ def read_xyz(filename):
 
     Returns
     -------
-    montage : mne.channels.montage.Montage
+    montage : `~mne.channels.DigMontage`
         Montage for EEG electrode locations.
     """
     n = int(open(filename).readline().lstrip().split(" ")[0])

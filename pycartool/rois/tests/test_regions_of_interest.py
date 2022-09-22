@@ -5,10 +5,8 @@
 
 import os
 
+from ...data import data_path
 from ..regions_of_interest import read_roi
-
-dir_path = os.path.dirname(os.path.realpath(__file__))
-data_path = os.path.join(dir_path, "data")
 
 
 def test_read_roi():

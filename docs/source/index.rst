@@ -9,6 +9,6 @@ Welcome to PyCartool's documentation!
    :maxdepth: 1
 
    install.rst
-   auto_tutorials/index
+   generated/auto_tutorials/index
    api/index
 

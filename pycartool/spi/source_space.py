@@ -37,7 +37,7 @@ def _checksubject(subject):
 
 
 def read_spi(filename, subject=None):
-    """Create a SourceSpace instance from Cartool spi file.
+    """Create a SourceSpace instance from Cartool ``.spi`` file.
 
     Parameters
     ----------
@@ -48,7 +48,7 @@ def read_spi(filename, subject=None):
 
     Returns
     -------
-    SourceSpace : pycartool.source_space.SourceSpace
+    SourceSpace : pycartool.spi.SourceSpace
         The SourceSpace.
     """
     with open(filename) as f:

@@ -8,7 +8,7 @@ import numpy as np
 
 
 def read_lf(filename):
-    """Read Cartool leadfield matrix.
+    """Read Cartool leadfield (??) file.
 
     Parameters
     ----------
@@ -17,9 +17,8 @@ def read_lf(filename):
 
     Returns
     -------
-    leadfield_matrix : numpy.ndarray, shape (n_channels, n_sources, 3)
-        the leadfield matrix.
-
+    leadfield_matrix : `~numpy.array`
+        The leadfield matrix. shape(``n_channels``, ``n_sources``, ``3``).
     """
     with open(filename, "rb") as f:
         byte = f.read(4)
