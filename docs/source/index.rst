@@ -8,8 +8,7 @@ Welcome to PyCartool's documentation!
 .. toctree::
    :maxdepth: 1
 
-   pycartool.io
-   pycartool.source_space
-   pycartool.source_estimate
-   pycartool.regions_of_interest
-   pycartool.tutorials
+   install.rst
+   auto_tutorials/index
+   api/index
+
