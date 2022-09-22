@@ -26,8 +26,8 @@ def read_is(filename, verbose=None):
     inverse_solution : `~numpy.array`
         Inverse solution matrices. n_dim=1 if solutions are scalar or
         n_dim=3 for vectorial solutions.
-        shape(``n_regularizations``, ``n_dim``, ``n_solutionpoints``, ``n_channels``). # noqa
-    """
+        shape(``n_regularizations``, ``n_dim``, ``n_solutionpoints``, ``n_channels``).
+    """ # noqa
     with open(filename, "rb") as f:
         logger.info(f"Reading {filename}")
         logger.info(f"Reading Header...")
