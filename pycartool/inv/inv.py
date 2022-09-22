@@ -9,6 +9,7 @@ import numpy as np
 from ..utils._docs import fill_doc
 from ..utils._logs import logger, verbose
 
+
 @fill_doc
 @verbose
 def read_is(filename, verbose=None):

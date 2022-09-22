@@ -113,6 +113,7 @@ class SourceSpace(object):
     filename : str or file-like
         If loaded from a file, the corresponding filename.
     """
+
     def __init__(self, names, coordinates, subject=None, filename=None):
         _checkcoordinates(coordinates)
         _checknames(names)
@@ -148,7 +149,7 @@ class SourceSpace(object):
         coordinates : `~numpy.array`
             The solutions point names coordinates.
             shape(``n_sources``, ``3``).
-         """
+        """
         return copy.deepcopy(self.coordinates)
 
     def get_names(self):

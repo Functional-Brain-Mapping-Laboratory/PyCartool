@@ -7,8 +7,9 @@ import struct
 import numpy as np
 
 from ..spi.source_space import SourceSpace, write_spi
-from ..utils._logs import logger, verbose
 from ..utils._docs import fill_doc
+from ..utils._logs import logger, verbose
+
 
 def _check_method(method):
     if method not in ["svd", "mean", "median"]:
@@ -29,6 +30,7 @@ def _check_sources_tc(sources_tc):
             f"or 3 (vectorial)"
         )
     return sources_tc
+
 
 @fill_doc
 @verbose
@@ -176,6 +178,7 @@ class SourceEstimate(object):
     filename : str
         Filename from which the source estimate was imported.
     """
+
     def __init__(
         self, sources_tc, sfreq, source_space=None, subject=None, filename=None
     ):
@@ -333,7 +336,9 @@ class SourceEstimate(object):
         """
         rois_names = region_of_interest.names
         rois_estimates = self.per_roi(region_of_interest)
-        rois_tc = np.array([roi.compute_tc(method=method) for roi in rois_estimates])
+        rois_tc = np.array(
+            [roi.compute_tc(method=method) for roi in rois_estimates]
+        )
         rois_coordinates = np.array(
             [
                 estimate.source_space.get_center_of_mass()
