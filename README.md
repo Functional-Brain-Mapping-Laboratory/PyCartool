@@ -1,8 +1,7 @@
 [![Latest PyPI Release](https://img.shields.io/pypi/v/pycartool.svg)](https://pypi.org/project/pycartool/)
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/pycartool.svg)](https://pypi.python.org/pypi/pycartool/)
 [![Build Status](https://dev.azure.com/vferat/pycartool/_apis/build/status/Functional-Brain-Mapping-Laboratory.PyCartool?branchName=dev)](https://dev.azure.com/vferat/pycartool/_build/latest?definitionId=5&branchName=dev)
-[![codecov](https://codecov.io/gh/vferat/PyCartool/branch/master/graph/badge.svg)](https://codecov.io/gh/vferat/PyCartool)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/38a68c3012224c97827e10e7ca914a52)](https://www.codacy.com/manual/vferat/PyCartool?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Functional-Brain-Mapping-Laboratory/PyCartool&amp;utm_campaign=Badge_Grade)
+[![codecov](https://codecov.io/gh/Functional-Brain-Mapping-Laboratory/PyCartool/branch/master/graph/badge.svg?token=3TeUfaAmXd)](https://codecov.io/gh/Functional-Brain-Mapping-Laboratory/PyCartool)
 [![Documentation Status](https://readthedocs.org/projects/pycartool/badge/?version=latest)](https://pycartool.readthedocs.io/en/latest/?badge=latest)
 ![License](https://img.shields.io/badge/license-BSD-green.svg)
 
