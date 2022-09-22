@@ -89,7 +89,7 @@ html_theme_options = {
     ],
     "external_links": [
         {"name": "MNE", "url": "https://mne.tools/stable/index.html"},
-        {"name": "Cartool", "url": "https://sites.google.com/site/cartoolcommunity/home"
+        {"name": "Cartool", "url": "https://sites.google.com/site/cartoolcommunity/home"}
     ],
 }
 
