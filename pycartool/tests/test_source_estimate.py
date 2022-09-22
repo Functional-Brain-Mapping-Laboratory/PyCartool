@@ -41,6 +41,7 @@ def generate_rois(n_roi, n_sources):
     regions_of_interest = RegionsOfInterest(rois_names, roi_indices)
     return regions_of_interest
 
+
 sfreq = 1
 n_samples = 500
 n_sources = 100
@@ -52,6 +53,7 @@ source_estimate.source_space = source_space
 
 regions_of_interest = generate_rois(n_rois, n_sources)
 regions_of_interest.source_space = source_space
+
 
 @pytest.mark.skip(reason="Requires large file")
 def test_read_is():
@@ -72,7 +74,9 @@ def test_write_ris():
     """Test write_is."""
     source_estimate.save("test.ris")
     read_source_estimate = read_ris("test.ris")
-    assert np.allclose(read_source_estimate.sources_tc, source_estimate.sources_tc)
+    assert np.allclose(
+        read_source_estimate.sources_tc, source_estimate.sources_tc
+    )
     assert read_source_estimate.sfreq == source_estimate.sfreq
     assert read_source_estimate.filename == "test.ris"
 
