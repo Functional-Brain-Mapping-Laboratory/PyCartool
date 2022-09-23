@@ -1,7 +1,7 @@
 I/O
 ===
 
-I/O for Cartool files :footcite:t:`brunet2011spatiotemporal`.
+I/O for Cartool files.
 
 
 .. currentmodule:: pycartool.io
@@ -24,8 +24,3 @@ I/O for Cartool files :footcite:t:`brunet2011spatiotemporal`.
    read_is
    read_ris
    write_ris
-
-References
-----------
-
-.. footbibliography::

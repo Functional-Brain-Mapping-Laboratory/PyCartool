@@ -17,6 +17,7 @@ def read_roi(filename, source_space=None, verbose=None):
 
     source_space : pycartool.spi.SourceSpace
         The SourceSpace corresponding to the regions of interest.
+    %(verbose)s
 
     Returns
     -------
