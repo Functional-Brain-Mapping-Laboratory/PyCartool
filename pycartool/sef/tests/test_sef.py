@@ -5,10 +5,8 @@
 
 import os
 
-from ..io.sef import read_sef, write_sef
-
-dir_path = os.path.dirname(os.path.realpath(__file__))
-data_path = os.path.join(dir_path, "data")
+from ...data import data_path
+from ..sef import read_sef, write_sef
 
 datasef = os.path.join(data_path, "sample-sef.sef")
 

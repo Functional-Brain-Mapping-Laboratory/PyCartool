@@ -6,10 +6,8 @@ import os
 
 import numpy as np
 
+from ...data import data_path
 from ..source_space import SourceSpace, read_spi, write_spi
-
-dir_path = os.path.dirname(os.path.realpath(__file__))
-data_path = os.path.join(dir_path, "data")
 
 
 def test_read_spi():

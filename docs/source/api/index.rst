@@ -23,3 +23,6 @@ This is the reference for classes (``CamelCase`` names) and functions
     :maxdepth: 2
 
     io
+    source_space
+    regions_of_interests
+    source_estimate

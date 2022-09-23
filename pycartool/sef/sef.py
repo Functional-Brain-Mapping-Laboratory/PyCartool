@@ -12,22 +12,26 @@ import numpy as np
 from mne import create_info
 from mne.io import RawArray
 
+from ..utils._docs import fill_doc
 from ..utils._logs import logger, verbose
 
 
+@fill_doc
 @verbose
 def read_sef(filename, verbose=None):
-    """Read file with format .sef, and returns a mne.io.Raw.
+    """Read file with format ``.sef``, and returns a `~mne.io.RawArray`.
 
     Parameters
     ----------
     filename : str or file-like
-        The Simple EEG (.sef) file to read.
+        The Simple EEG (``.sef``) file to read.
+    %(verbose)s
 
     Returns
     -------
-    raw : mne.io.RawArray
+    raw : `~mne.io.RawArray`
         RawArray containing the EEG signals.
+    %(verbose)s
     """
     f = open(filename, "rb")
     #   Read fixed part of the headerà
@@ -78,13 +82,13 @@ def read_sef(filename, verbose=None):
 
 
 def write_sef(filename, raw):
-    """Export a raw mne file to a sef file.
+    """Export a raw mne file to a ``.sef`` file.
 
     Parameters
     ----------
     filename : str or file-like
         Filename of the exported dataset.
-    raw : mne.io.RawArray
+    raw : `~mne.io.RawArray`
         The raw data to export.
     """
     n_channels = len(raw.info["ch_names"])

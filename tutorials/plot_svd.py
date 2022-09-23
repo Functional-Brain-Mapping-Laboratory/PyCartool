@@ -17,8 +17,8 @@ import pycartool as cart
 fname_spi = "MNI152.NlinAsym09c.204.5000.2017.spi"
 fname_roi = "MNI152.NlinAsym09c.204.5000.2017.AAL.rois"
 
-spi = cart.source_space.read_spi(fname_spi)
-roi = cart.regions_of_interest.read_roi(fname_roi, spi)
+spi = cart.spi.read_spi(fname_spi)
+roi = cart.rois.read_roi(fname_roi, spi)
 
 # %% [markdown]
 # #### Constants
@@ -67,7 +67,7 @@ plt.title("Time course of sources inside the first Roi  (x direction)")
 plt.show()
 
 # %%
-source_estimate_simulated = cart.source_estimate.SourceEstimate(
+source_estimate_simulated = cart.ris.SourceEstimate(
     simulated_tc, sfreq=sfreq, source_space=spi
 )
 

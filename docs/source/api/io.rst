@@ -1,5 +1,8 @@
-IO
-==
+I/O
+===
+
+I/O for Cartool files.
+
 
 .. currentmodule:: pycartool.io
 
@@ -14,5 +17,10 @@ IO
    write_sef
    read_xyz
    write_xyz
+   read_spi
+   write_spi
    read_lf
    read_is
+   read_is
+   read_ris
+   write_ris

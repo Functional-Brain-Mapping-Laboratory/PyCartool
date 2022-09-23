@@ -37,7 +37,7 @@ def _checksubject(subject):
 
 
 def read_spi(filename, subject=None):
-    """Create a SourceSpace instance from Cartool spi file.
+    """Create a SourceSpace instance from Cartool ``.spi`` file.
 
     Parameters
     ----------
@@ -48,7 +48,7 @@ def read_spi(filename, subject=None):
 
     Returns
     -------
-    SourceSpace : pycartool.source_space.SourceSpace
+    SourceSpace : pycartool.spi.SourceSpace
         The SourceSpace.
     """
     with open(filename) as f:
@@ -65,13 +65,13 @@ def read_spi(filename, subject=None):
 
 
 def write_spi(filename, SourceSpace):
-    """Write Cartool spi file.
+    """Write Cartool ``.spi`` file.
 
     Parameters
     ----------
     filename : str or file-like
-        The spi file to write.
-    SourceSpace : pycartool.source_space.SourceSpace
+        The ``.spi`` file to write.
+    SourceSpace : `pycartool.spi.SourceSpace`
         The SourceSpace to save.
     """
     names = SourceSpace.names
@@ -87,10 +87,12 @@ class SourceSpace(object):
 
     Parameters
     ----------
-    names : :obj:`list` of :obj:`str`, length (n_sources)
+    names : list of str
         The solutions point names.
-    coordinates : numpy.ndarray, shape (n_sources, 3)
+        Length (``n_sources``).
+    coordinates : `~numpy.ndarray`
         The solutions point names coordinates.
+        Shape(n_sources, 3).
     subject : str
         Subject from who the source space was created.
     filename : str or file-like
@@ -100,15 +102,16 @@ class SourceSpace(object):
     ----------
     n_sources : int
         Number of sources.
-    names : :obj:`list` of :obj:`str`, length (n_sources)
+    names : list of str
         The solutions point names.
-    coordinates : numpy.ndarray, shape (n_sources, 3)
+        Length ``n_sources``.
+    coordinates : `~numpy.array`
         The solutions point names coordinates.
+         Shape(``n_sources``, ``3``)
     subject : str
         Subject from who the source space was created.
     filename : str or file-like
         If loaded from a file, the corresponding filename.
-
     """
 
     def __init__(self, names, coordinates, subject=None, filename=None):
@@ -139,21 +142,34 @@ class SourceSpace(object):
         return f"<SourceSpace or {s}>"
 
     def get_coordinates(self):
-        """Return a copy of sources coordinates."""
+        """Return a copy of sources coordinates.
+
+        Returns
+        -------
+        coordinates : `~numpy.array`
+            The solutions point names coordinates.
+            shape(``n_sources``, ``3``).
+        """
         return copy.deepcopy(self.coordinates)
 
     def get_names(self):
-        """Return a copy of sources names."""
+        """Return a copy of sources names.
+
+        Returns
+        -------
+        names : list of str
+            The solutions point names.
+            Length ``n_sources``.
+        """
         return copy.deepcopy(self.names)
 
     def save(self, filename):
-        """Write SourceSpace to Cartool spi file.
+        """Write SourceSpace to ``.spi`` file.
 
         Parameters
         ----------
         filename : str or file-like
-            The spi file to write.
-
+            The ``.spi`` file to write.
         """
         write_spi(filename, self)
 
@@ -167,9 +183,8 @@ class SourceSpace(object):
 
         Returns
         -------
-        center_of_mass : numpy.ndarray, shape(3)
+        center_of_mass : `~numpy.array`
             The x,y,z coordinates of the center of mass.
-
         """
         if method == "mean":
             center_of_mass = np.mean(self.coordinates, axis=0)

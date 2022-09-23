@@ -6,25 +6,28 @@ import struct
 
 import numpy as np
 
+from ..utils._docs import fill_doc
 from ..utils._logs import logger, verbose
 
 
+@fill_doc
 @verbose
 def read_is(filename, verbose=None):
-    """Read Cartool inverse solution (.is) file.
+    """Read Cartool inverse solution (``.is``) file.
 
     Parameters
     ----------
     filename : str or file-like
-        the Inerse solution file (.is) to read.
+        Path to the inverse solution file ``(.is``) to read.
+    %(verbose)s
 
     Returns
     -------
-    inverse_solution : numpy.ndarray, shape (n_regularizations, n_dim, n_solutionpoints, n_channels) # noqa
-        the inverse solution matrices. n_dim=1 if solutions are scalar or
+    inverse_solution : `~numpy.array`
+        Inverse solution matrices. n_dim=1 if solutions are scalar or
         n_dim=3 for vectorial solutions.
-
-    """
+        shape(``n_regularizations``, ``n_dim``, ``n_solutionpoints``, ``n_channels``).
+    """  # noqa
     with open(filename, "rb") as f:
         logger.info(f"Reading {filename}")
         logger.info(f"Reading Header...")
