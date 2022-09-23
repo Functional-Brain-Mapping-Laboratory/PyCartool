@@ -8,12 +8,12 @@ import numpy as np
 
 
 def read_lf(filename):
-    """Read Cartool leadfield (??) file.
+    """Read Cartool leadfield (``.lf``) file.
 
     Parameters
     ----------
     filename : str or file-like
-        The leadfield file (.lf) to read.
+        The leadfield file (``.lf``) to read.
 
     Returns
     -------

@@ -9,12 +9,12 @@ from mne.channels import make_dig_montage
 
 
 def read_xyz(filename):
-    """Read and convert xyz positions to a mne montage type.
+    """Read and convert ``.xyz`` positions to a `~mne.channels.DigMontage`.
 
     Parameters
     ----------
     filename : str
-        The filename of the xyz file.
+        The filename of the ``.xyz`` file.
 
     Returns
     -------
@@ -37,12 +37,12 @@ def read_xyz(filename):
 
 
 def write_xyz(filename, info):
-    """Export channels coordinates from raw.info to a xyz file.
+    """Export channels coordinates from raw.info to a ``.xyz`` file.
 
     Parameters
     ----------
     filename : str or file-like
-        Filename of the xyz file .
+        Filename of the ``.xyz`` file .
     info : mne.Info
         The info object use to extract the montage.
     """

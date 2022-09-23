@@ -101,12 +101,12 @@ def read_ris(filename, source_space=None, subject=None, verbose=None):
 
 
 def write_ris(source_estimate, filename):
-    """Write SourceEstimate instance to file.
+    """Write SourceEstimate ``.ris`` instance to file.
 
     Parameters
     ----------
-    source_estimate : `pycartool.ris.SourceEstimate`
-        The SourceEstimate to save as a ris file.
+    source_estimate : `~pycartool.ris.SourceEstimate`
+        The SourceEstimate to save as a ``.ris`` file.
     filename : str or file-like
         Filename of the exported inverse solution computation.
     """
