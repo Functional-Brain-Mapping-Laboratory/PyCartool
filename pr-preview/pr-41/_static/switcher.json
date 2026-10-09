@@ -1,0 +1,17 @@
+[
+    {
+        "name": "latest (0.2.0)",
+        "version": "0.2.0",
+        "url": "https://fcbg-platforms.github.io/pycartool/latest/"
+    },
+    {
+        "name": "dev",
+        "version": "dev",
+        "url": "https://fcbg-platforms.github.io/pycartool/dev/"
+    },
+    {
+        "name": "0.2.0",
+        "version": "0.2.0",
+        "url": "https://fcbg-platforms.github.io/pycartool/0.2.0/"
+    }
+]
